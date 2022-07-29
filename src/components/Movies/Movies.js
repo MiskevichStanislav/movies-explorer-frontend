@@ -3,7 +3,7 @@ import './Movies.css';
 function Movies() {
     return (
         <div className="movies-page">
-            Movies
+            <h1>Movies</h1>
         </div>
     );
 }
