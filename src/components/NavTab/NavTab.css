@@ -13,8 +13,30 @@
     font-size: 13px;
     line-height: 16px;
     font-weight: 500;
-    border-bottom: 1px solid;
+    display: inline-block;
+    color: #ffffff;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    /* border-bottom: 1px solid; */
 }
+
+.navtab__link:after {
+    background-color: #ffffff;
+    display: block;
+    content: "";
+    height: 1px;
+    width: 0%;
+    -webkit-transition: width .3s ease-in-out;
+    -moz--transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+}
+
+.navtab__link:hover:after,
+.navtab__link:focus:after {
+    width: 100%;
+}
+
 
 @media screen and (max-width: 768px) {
     .navtab__list {

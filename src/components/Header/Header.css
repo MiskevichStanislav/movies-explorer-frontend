@@ -32,20 +32,51 @@
 }
 
 .header__profile {
+    text-decoration: none;
     align-items: center;
-    border: 2px solid #525252;
-    border-radius: 50px;
+    display: flex;
     box-sizing: border-box;
     cursor: pointer;
-    display: flex;
     flex-direction: row-reverse;
-    gap: 7px;
-    height: 32px;
+    padding: 10px 30px;
+    margin: 15px 0;
+    position: relative;
+    overflow: hidden;
     justify-content: center;
     margin-left: 50px;
-    text-decoration: none;
-    transition: .3s;
-    width: 100px;
+    border: 2px solid #525252;
+    border-radius: 50px;
+    gap: 7px;
+    color: #fff !important;
+    font-size: 0.950em;
+    transition: .3s ease-in-out;
+}
+
+.header__profile:before {
+    content: "";
+    background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
+    height: 60px;
+    width: 50px;
+    position: absolute;
+    top: 0px;
+    left: -80px;
+    transform: skewX(-45deg);
+}
+
+.header__profile:hover {
+    background: #83bfc503;
+    color: #fff !important;
+}
+
+.header__profile:hover:before {
+    left: 100%;
+    transition: .5s ease-in-out;
+}
+
+.header__profile:focus {
+    background: #83bec5;
+    color: #fff !important;
+    outline: none;
 }
 
 .header__profile-button {
@@ -61,7 +92,7 @@
     background-image: url("../../images/header.profile.svg");
     height: 14px;
     width: 12px;
-    
+
 }
 
 @media screen and (max-width: 768px) {
