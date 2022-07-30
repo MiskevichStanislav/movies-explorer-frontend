@@ -24,7 +24,7 @@ function Login() {
                 value={password}
                 setValue={setPassword}
             />
-            <button className='form__submit-button'>Войти</button>
+            <button className='authform__submit-button'>Войти</button>
         </form>
     );
 }
