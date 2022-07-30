@@ -1,50 +1,62 @@
 import { Route, Switch } from "react-router-dom";
 
 import './App.css';
-import Header from '../Header/Header'
-import Movies from '../../components/Movies/Movies'
-import Profile from '../../components/Profile/Profile'
-import Register from '../../components/Register/Register'
-import Login from '../../components/Login/Login'
-import SavedMovies from '../../components/SavedMovies/SavedMovies'
-import Main from '../../components/Main/Main'
-import NotFound from '../../pages/NotFound/NotFound_404'
-import './App.css';
+import Movies from '../../components/Movies/Movies';
+import Profile from '../../components/Profile/Profile';
+import Register from '../../components/Register/Register';
+import Login from '../../components/Login/Login';
+import SavedMovies from '../../components/SavedMovies/SavedMovies';
+import Main from '../../components/Main/Main';
+import NotFound from '../../pages/NotFound/NotFound_404';
+import HeaderLayout from "../../layouts/HeaderLayout/HeaderLayout";
+import HeaderAndFooterLayout from "../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout";
+import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 
 function App() {
   return (
-    <div className="app">
-      <Header />
+    <>
       <Switch>
         <Route path='/movies' exact>
-          <Movies />
+          <HeaderAndFooterLayout>
+            <Movies />
+          </HeaderAndFooterLayout>
         </Route>
 
         <Route path='/saved-movies' exact>
-          <SavedMovies />
+          <HeaderAndFooterLayout>
+            <SavedMovies />
+          </HeaderAndFooterLayout>
         </Route>
 
         <Route path='/profile' exact>
-          <Profile />
+          <HeaderLayout>
+            <Profile />
+          </HeaderLayout>
         </Route>
 
         <Route path='/signin' exact>
-          <Login />
+          <AuthLayout>
+            <Login />
+          </AuthLayout>
         </Route>
 
         <Route path='/signup' exact>
-          <Register />
+          <AuthLayout>
+            <Register />
+          </AuthLayout>
         </Route>
 
         <Route path='/' exact>
-          <Main />
+          <HeaderAndFooterLayout>
+            <Main />
+          </HeaderAndFooterLayout>
         </Route>
 
         <Route path='*'>
           <NotFound />
         </Route>
       </Switch>
-    </div>
+      </>
   );
 }
 
