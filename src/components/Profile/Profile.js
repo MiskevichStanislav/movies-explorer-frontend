@@ -2,13 +2,13 @@ import { useState } from "react";
 import './Profile.css';
 
 function Profile() {
-    const [name, setName] = useState('Станислав')
-    const [email, setEmail] = useState('pochta@yandex.ru')
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
     return (
         <div className="profile">
             <div className="container profile__container">
                 <div className="profile__wrapper">
-                    <h1 className="profile__title">Привет, Станислав!</h1>
+                    <h1 className="profile__title">Привет, { name }</h1>
                     <form className="profile__form">
                         <label className='profile__label'>
                             <p className="profile__text">Имя</p>

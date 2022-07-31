@@ -50,6 +50,7 @@
     background-color: transparent;
     color: inherit;
     width: 100%;
+    outline: none;
 }
 
 .profile__buttons {
