@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './Login.css';
 import Field from "../Field/Field";
+import Authorization from "../Authorization/Authorization";
 
 function Login() {
     const [email, setEmail] = useState('')
@@ -11,7 +12,7 @@ function Login() {
         console.log(email, password);
     }
     return (
-        <form className="form" onSubmit={handleSubmitForm} name='login'>
+        <form className="form form-login" onSubmit={handleSubmitForm} name='login'>
             <Field
                 text='E-mail'
                 type='email'
@@ -24,7 +25,7 @@ function Login() {
                 value={password}
                 setValue={setPassword}
             />
-            <button className='authform__submit-button'>Войти</button>
+            <Authorization />
         </form>
     );
 }

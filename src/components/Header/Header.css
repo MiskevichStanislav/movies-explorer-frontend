@@ -52,6 +52,8 @@
     transition: .3s ease-in-out;
 }
 
+/*ОТКЛЮЧИЛ ЭФФЕКТЫ КНОПОК ДЛЯ ЭТАПА ДОПОЛНИТЕЛЬНОЙ ДОРАБОТКИ*/
+
 /* .header__profile:before {
     content: "";
     background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
@@ -78,6 +80,7 @@
     color: #fff ;
     outline: none;
 } */
+/*ОТКЛЮЧИЛ ЭФФЕКТЫ КНОПОК ДЛЯ ЭТАПА ДОПОЛНИТЕЛЬНОЙ ДОРАБОТКИ*/
 
 .header__profile-button {
     color: #fff;

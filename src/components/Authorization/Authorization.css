@@ -1,0 +1,31 @@
+.authorization{
+    display: flex;
+    column-gap: 5px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.authorization__text {
+    color: #8b8b8b;
+}
+
+.authorization__link {
+    color: #4285f4;
+}
+
+.form__submit-button {
+    width: 100%;
+    background-color: #4285f4;
+    padding: 15px 0;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 768px) {
+    .authorization {
+        font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .form__submit-button {
+        font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (768 - 320)));
+    }
+}

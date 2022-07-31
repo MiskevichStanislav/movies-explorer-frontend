@@ -1,6 +1,8 @@
 import { useState } from "react";
 import './Register.css';
+import Authorization from "../Authorization/Authorization";
 import Field from "../Field/Field";
+
 
 function Register() {
     const [name, setName] = useState('')
@@ -12,7 +14,7 @@ function Register() {
         console.log(name, email, password);
     }
     return (
-        <form className="form" onSubmit={handleSubmitForm} name='register'>
+        <form className="form form-register" onSubmit={handleSubmitForm} name='register'>
             <Field
                 text='Имя'
                 value={name}
@@ -30,7 +32,7 @@ function Register() {
                 value={password}
                 setValue={setPassword}
             />
-            <button className='authform__submit-button'>Зарегистрироваться</button>
+            <Authorization />
         </form>
     );
 }
