@@ -18,10 +18,10 @@
     line-height: 1;
     text-decoration: none;
     cursor: pointer;
-    /* border-bottom: 1px solid; */
+    border-bottom: 1px solid;
 }
 
-.navtab__link:after {
+/* .navtab__link:after {
     background-color: #ffffff;
     display: block;
     content: "";
@@ -35,7 +35,7 @@
 .navtab__link:hover:after,
 .navtab__link:focus:after {
     width: 100%;
-}
+} */
 
 
 @media screen and (max-width: 768px) {
