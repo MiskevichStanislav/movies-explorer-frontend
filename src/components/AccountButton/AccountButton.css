@@ -1,0 +1,42 @@
+.account-button {
+    text-decoration: none;
+    align-items: center;
+    display: flex;
+    box-sizing: border-box;
+    cursor: pointer;
+    flex-direction: row-reverse;
+    padding: 8px 12px;
+    margin: 15px 0;
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    border: 2px solid #525252;
+    border-radius: 50px;
+    gap: 7px;
+    color: #fff;
+    font-size: 0.950em;
+    transition: .3s ease-in-out;
+}
+
+.account-button__link {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+.account-button__photo {
+    width: 12px;
+    height: 14px;
+    border-radius: 4px;
+    background-image: url("../../images/header.profile.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 14px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .header .account-button {
+        display: none;
+    }
+}

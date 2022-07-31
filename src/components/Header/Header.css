@@ -30,72 +30,14 @@
     background-color: #3ddc84;
     border-radius: 3px;
 }
-
-.header__profile {
-    text-decoration: none;
-    align-items: center;
-    display: flex;
-    box-sizing: border-box;
-    cursor: pointer;
-    flex-direction: row-reverse;
-    padding: 10px 30px;
-    margin: 15px 0;
-    position: relative;
-    overflow: hidden;
-    justify-content: center;
-    margin-left: 50px;
-    border: 2px solid #525252;
-    border-radius: 50px;
-    gap: 7px;
-    color: #fff;
-    font-size: 0.950em;
-    transition: .3s ease-in-out;
-}
-
-/*ОТКЛЮЧИЛ ЭФФЕКТЫ КНОПОК ДЛЯ ЭТАПА ДОПОЛНИТЕЛЬНОЙ ДОРАБОТКИ*/
-
-/* .header__profile:before {
-    content: "";
-    background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
-    height: 60px;
-    width: 50px;
-    position: absolute;
-    top: 0px;
-    left: -80px;
-    transform: skewX(-45deg);
-} */
-
-/* .header__profile:hover {
-    background: #83bfc503;
-    color: #fff;
-}
-
-.header__profile:hover:before {
-    left: 100%;
-    transition: .5s ease-in-out;
-}
-
-.header__profile:focus {
-    background: #83bec5;
-    color: #fff ;
-    outline: none;
-} */
-/*ОТКЛЮЧИЛ ЭФФЕКТЫ КНОПОК ДЛЯ ЭТАПА ДОПОЛНИТЕЛЬНОЙ ДОРАБОТКИ*/
-
-.header__profile-button {
-    color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    margin: 0;
-    text-decoration: none;
-}
-
-.header__profile-photo {
-    background-image: url("../../images/header.profile.svg");
-    height: 14px;
-    width: 12px;
-
+.header__menu-button {
+    display: none;
+    width: 28px;
+    height: 23px;
+    background-image: url("../../images/menu-button-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 @media screen and (max-width: 768px) {
@@ -104,10 +46,6 @@
     }
 
     .header__nav {
-        display: none;
-    }
-
-    .header__profile {
         display: none;
     }
 

@@ -10,13 +10,14 @@ function Login() {
     return (
         <div className="error-404">
             <div className="error-404__text">
-            <p className="error-404__title">404</p>
-            <p className="error-404__subtitle">Страница не найдена</p>
+                <p className="error-404__title">404</p>
+                <p className="error-404__subtitle">Страница не найдена</p>
             </div>
             <button
                 className="error-404__go-back"
-                onClick={handleClick}>Назад
-            </button>
+                onClick={handleClick}
+                type="button"
+            >Назад</button>
         </div>
     );
 }

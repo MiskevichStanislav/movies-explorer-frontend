@@ -2,9 +2,11 @@
     padding: 100px 0;
     background-color: #272727;
 }
+
 .techs__container {
     padding: 0 50px;
 }
+
 .techs__title {
     margin-bottom: 90px;
 }
@@ -42,6 +44,7 @@
     background-color: #303030;
     border-radius: 10px;
 }
+
 @media screen and (max-width: 1140px) {
     .techs {
         padding: calc(90px + (100 - 90) * ((100vw - 768px) / (1140 - 768))) 0;
@@ -58,8 +61,9 @@
     }
 
     .techs__list {
-        grid-template-columns: repeat(auto-fit, calc(84px + (90 - 84) * ((100vw - 768px) / (1140 - 768))));
-        grid-auto-rows: calc(57px + (60 - 57) * ((100vw - 768px) / (1140 - 768)));
+        padding: 0 calc(50px + (0 - 50) * ((100vw - 320px) / (768 - 320)));
+        grid-template-columns: repeat(auto-fit, 84px);
+        grid-auto-rows: 57px;
     }
 
     .techs__item {

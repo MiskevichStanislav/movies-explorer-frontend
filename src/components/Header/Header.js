@@ -3,17 +3,16 @@ import { useHistory, Link } from "react-router-dom";
 import './Header.css';
 import Logo from '../Logo/Logo';
 import Navigation from "../Navigation/Navigation";
+import AccountButton from "../AccountButton/AccountButton";
+import { useState } from "react";
 
 function Header() {
     const currentPath = useHistory().location.pathname;
     const isMainPage = currentPath === '/';
-    const isLoggedIn = true;
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const buttons = isLoggedIn ? (
-        <div className="header__profile">
-            <Link className="header__profile-button" to='/profile'>Аккаунт</Link>
-            <div className="header__profile-photo"></div>
-        </div>
+        <AccountButton />
     ) : (
         <div className="header__buttons">
             <Link className="header__button" to='/signup'>Регистрация</Link>
@@ -31,6 +30,7 @@ function Header() {
                     <Logo />
                     {isLoggedIn && <Navigation />}
                     {buttons}
+                    {isLoggedIn && <div className="header__menu-button"></div>}
                 </div>
             </div>
         </header >
