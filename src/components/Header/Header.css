@@ -65,7 +65,7 @@
 
 .header__profile:hover {
     background: #83bfc503;
-    color: #fff !important;
+    color: #fff;
 }
 
 .header__profile:hover:before {
@@ -80,7 +80,7 @@
 }
 
 .header__profile-button {
-    color: rgb(255, 255, 255);
+    color: #fff;
     font-size: 14px;
     font-weight: 500;
     line-height: 16px;
