@@ -47,12 +47,12 @@
     border: 2px solid #525252;
     border-radius: 50px;
     gap: 7px;
-    color: #fff !important;
+    color: #fff;
     font-size: 0.950em;
     transition: .3s ease-in-out;
 }
 
-.header__profile:before {
+/* .header__profile:before {
     content: "";
     background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
     height: 60px;
@@ -61,9 +61,9 @@
     top: 0px;
     left: -80px;
     transform: skewX(-45deg);
-}
+} */
 
-.header__profile:hover {
+/* .header__profile:hover {
     background: #83bfc503;
     color: #fff;
 }
@@ -75,9 +75,9 @@
 
 .header__profile:focus {
     background: #83bec5;
-    color: #fff !important;
+    color: #fff ;
     outline: none;
-}
+} */
 
 .header__profile-button {
     color: #fff;
