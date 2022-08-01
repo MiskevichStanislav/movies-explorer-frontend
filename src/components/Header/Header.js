@@ -9,7 +9,7 @@ import { useState } from "react";
 function Header() {
     const currentPath = useHistory().location.pathname;
     const isMainPage = currentPath === '/';
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn] = useState(false);
 
     const buttons = isLoggedIn ? (
         <AccountButton />

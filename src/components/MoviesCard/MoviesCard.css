@@ -1,0 +1,85 @@
+.card-movies {
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    background-color: #222222;
+}
+
+.card-movies__image {
+    background-image: url("../../images/film.jpg");
+    height: 236px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.card-movies__description {
+    padding: 16px;
+}
+
+.card-movies__rows {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.card-movies__name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.card-movies__select {
+    width: 30px;
+    height: 30px;
+    background-image: url("../../images/delete-favorite.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 30px;
+    background-color: #313131;
+}
+
+.card-movies__select_active {
+    width: 30px;
+    height: 30px;
+    background-image: url("../../images/select-active-icon.svg");
+}
+
+.card-movies__length {
+    font-size: 11px;
+    color: #8b8b8b;
+}
+
+.saved .card-movies {
+    cursor: pointer;
+}
+
+.saved .card-movies .card-movies__select {
+    display: none;
+}
+
+.saved .card-movies:hover .card-movies__select {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url("../../images/delete-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 30px;
+    background-color: #313131;
+}
+
+@media screen and (max-width: 1140px) {
+    .card-movies__image {
+        height: calc(190px + (203 - 190) * ((100vw - 768px) / (1140 - 768)));
+    }
+}
+
+.card-movies__name {
+    font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (768 - 320)));
+}
+
+.card-movies__duration {
+    font-size: calc(10px + (11 - 10) * ((100vw - 320px) / (768 - 320)));
+}

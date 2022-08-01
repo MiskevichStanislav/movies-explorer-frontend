@@ -1,8 +1,12 @@
+import './MoviesCardList.css';
+import MoviesCard from '../MoviesCard/MoviesCard';
 function MoviesCardList() {
     return (
-        <main className="movies-list">
-            <h1>MoviesCardList</h1>
-        </main>
+        <ul className="movies-list">
+            <MoviesCard />
+            <MoviesCard />
+            <MoviesCard />
+        </ul>
     );
 }
 

@@ -1,0 +1,15 @@
+.nav__list {
+    display: flex;
+    column-gap: 16px;
+}
+
+.nav__link {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+}
+
+.nav__link_active {
+    color: #ffffff;
+    font-weight: 500;
+}
