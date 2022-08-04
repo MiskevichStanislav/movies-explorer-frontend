@@ -5,7 +5,7 @@
 }
 
 .card-movies__image {
-    background-image: url("../../images/film.jpg");
+    /* background-image: url("../../images/film.jpg"); */
     height: 236px;
     background-repeat: no-repeat;
     background-position: center;

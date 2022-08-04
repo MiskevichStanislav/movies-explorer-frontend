@@ -13,11 +13,14 @@ function MoviesCard() {
                                 ? "card-movies__select card-movies__select_active"
                                 : "card-movies__select"
                         }
+                        type="button"
                     ></button>
                 </div>
                 <p className="card-movies__length">1ч 47м</p>
             </div>
-            <div className="card-movies__image"></div>
+            <img className="card-movies__image"
+                src="https://s4.afisha.ru/mediastorage/44/9e/c9773f790a4e490ebc0921569e44.jpg"
+                alt="карточки фильмов" />
            
         </li>
     );
