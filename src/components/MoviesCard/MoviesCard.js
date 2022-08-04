@@ -1,4 +1,5 @@
 import './MoviesCard.css';
+import cardFilm from '../../images/film.jpg';
 
 function MoviesCard() {
     const isFavofiteFilm = true
@@ -19,7 +20,7 @@ function MoviesCard() {
                 <p className="card-movies__length">1ч 47м</p>
             </div>
             <img className="card-movies__image"
-                src="https://s4.afisha.ru/mediastorage/44/9e/c9773f790a4e490ebc0921569e44.jpg"
+                src={cardFilm}
                 alt="карточки фильмов" />
            
         </li>

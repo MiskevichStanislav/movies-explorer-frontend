@@ -24,7 +24,7 @@ function Movies() {
                     searchFilms={searchFilms}
                 />
                 <MoviesCardList />
-                <button className="movies__next-button">Ещё</button>
+                <button className="movies__next-button" type="button">Ещё</button>
             </div>
         </div>
     );

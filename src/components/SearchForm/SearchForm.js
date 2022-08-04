@@ -14,7 +14,10 @@ function SearchForm({ isShort, setIsShort, searchQuery, setSearchQuery, searchFi
                         onInput={e => setSearchQuery(e.target.value)}
                         required
                     />
-                    <button className="forms-search__button">Найти</button>
+                    <button
+                        className="forms-search__button"
+                        type="button">Найти
+                    </button>
                 </form>
 
                 <label className="forms-search__label" >
