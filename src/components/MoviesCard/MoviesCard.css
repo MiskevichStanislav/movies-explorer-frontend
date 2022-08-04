@@ -49,6 +49,10 @@
     font-size: 11px;
     color: #8b8b8b;
 }
+ .card-movies:hover {
+    cursor: pointer;
+    opacity: .8;
+} 
 
 .saved .card-movies {
     cursor: pointer;
