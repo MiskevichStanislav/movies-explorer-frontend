@@ -15,9 +15,6 @@ import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 import Menu from "../Menu/Menu";
 import { useEffect } from "react";
 
-import MainApi from "../../utils/MainApi";
-import MoviesApi from '../../utils/MoviesApi'
-
 function App() {
   const [isShowMenu, setIsShowMenu] = useState(false)
 
