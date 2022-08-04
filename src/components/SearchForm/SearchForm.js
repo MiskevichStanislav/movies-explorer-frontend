@@ -8,9 +8,11 @@ function SearchForm({ isShort, setIsShort, searchQuery, setSearchQuery, searchFi
                     <input
                         className="forms-search__input"
                         type="text"
+                        name='film'
                         placeholder='Фильм'
                         value={searchQuery}
                         onInput={e => setSearchQuery(e.target.value)}
+                        required
                     />
                     <button className="forms-search__button">Найти</button>
                 </form>
@@ -19,6 +21,7 @@ function SearchForm({ isShort, setIsShort, searchQuery, setSearchQuery, searchFi
                     <input
                         className="forms-search__checkbox"
                         type="checkbox"
+                        name='short'
                         checked={isShort}
                         onChange={() => setIsShort(!isShort)}
                     />
