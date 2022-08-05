@@ -16,7 +16,7 @@ function SearchForm({ isShort, setIsShort, searchQuery, setSearchQuery, searchFi
                     />
                     <button
                         className="forms-search__button"
-                        type="button">Найти
+                        type="submit">Найти
                     </button>
                 </form>
 
