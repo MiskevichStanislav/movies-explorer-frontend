@@ -1,0 +1,10 @@
+.logo {
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    transition: transform linear 0.3s;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}

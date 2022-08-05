@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+### 📰 Movies
+--------------------------
+Проект Movies - выпускная работа по профессии веб-разработчик курса Яндекс Практикум
+#### [План работы над дипломным проектом (Online)](https://trello.com/b/CbFnh2HD/project-diploma-work)
+#### [Индивидуальный макет в Figm'e](https://www.figma.com/file/mIrPoMCYLA3glp9KZDm7yt/Diploma-(Copy)?node-id=891%3A3857)
+## [Дипломный проект(Фронтенд)](https://mydiplomapi.nomoredomains.xyz)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Выполнил работу: Мискевич Станислав
 
-## Available Scripts
+ ### ✍🏻Краткое описание проекта
+Проект представляет собой сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
 
-In the project directory, you can run:
+Пользователь, зайдя на сайт, попадает на главную страницу с описанием проекта, используемых технологий и автора данного проекта. Пройдя по ссылкам "Регистрация" или "Войти" можно зарегестрироваться или авторизоваться.
 
-### `npm start`
+На странице "Фильмы" пользователь вводит в строку поиска ключевые слова и нажимает кнопку «Искать». После этого сайт должен выполнить два действия:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Отправить запрос к сервису BeatfilmMoviesApi с данными о фильмах, получить данные и сохранить;
+- Найти все подходящие фильмы, согласно выбранному жанру, и отобразить карточки с ними;
+- Когда пользователь сохраняет фильм, он должен отображаться в специальном разделе сайта.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Сайт состоит из 6 страниц:
 
-### `npm test`
+_ Главная. Содержит информацию о выполненном проекте.
+- Страница с фильмами. На ней есть форма поиска фильмов и блок с результатами поиска.
+- Страница с сохранёнными фильмами. Показывает фильмы, сохранённые пользователем.
+- Страница регистрации. Позволяет пользователю зарегистрировать аккаунт.
+- Страница авторизации. На ней пользователь может войти в систему.
+- Страница редактирования профиля. Пользователь может изменить данные своего аккаунта.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 📖Задачи
 
-### `npm run build`
+Проект адаптирован под различные разрешения экрана, соответствует макетам, сделанным для них.
+Все блоки из макета свёрстаны. Корректно работает навигация между страницами и ссылки на внешние ресурсы: ни одна ссылка не ведёт в пустоту или на якорь, внешние ссылки открываются в новой вкладке.
+Отзывчивая вёрстка, которая корректно тянется на всех промежуточных разрешениях.
+Отсутствуют ошибки валидации.
+Разметка портирована в JSX.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Модальные окны настроены и направляют запросы на соответствующие роуты написанного для этого проекта API.
+Правильно работают оба состояния шапки. Если пользователь не вошёл в систему и находится на главной странице, в шапке должны быть кнопки «Регистрация» и «Войти». Если пользователь залогинился, в шапке сайта отображаются кнопки «Фильмы», «Сохранённые фильмы» и «Аккаунт».
+После успешного сабмита формы поиска появляется блок с результатами. Если ничего не найдено, появляется надпись «Ничего не найдено».
+В блоке результата отображаются 3 карточки. Нажатие на кнопку «Показать ещё» отображает следующие 3 карточки.
+Если пользователь закрыл вкладку, а после — вернулся на сайт, данные достаются из локального хранилища при монтировании компонента App.
+При клике на иконку «Лайк» без заливки выполняется запрос к /movies нашего API на сохранение фильма. Клик по иконке с заливкой — запрос на удаление.
+На странице «Сохранённые фильмы» под шапкой, отображается форма поиска, аналогичная форме на странице "Фильмы". При вводе данных в эту форму и её отправке — запрос к серверу не отправляется. Поиск происходит по фильмам, которые пользователь сохранил.
+Роут /saved-movies защищён HOC-компонентом ProtectedRoute.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ ### 📃Используемые Технологии:
+ <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-plain-wordmark.svg"  title="CSS3" alt="CSS" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
+  <img src="https://user-images.githubusercontent.com/78322084/162064174-194ac89a-024d-4839-aae3-22d9ee4e3a33.png"  title="GitHub" alt="GitHub" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/nodejs/nodejs-original-wordmark.svg" title="NodeJS" alt="NodeJS" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/express/express-original.svg" title="NodeJS" alt="NodeJS" width="40" height="40"/>&nbsp;
+   <img src="https://github.com/devicons/devicon/blob/master/icons/figma/figma-original.svg" title="NodeJS" alt="NodeJS" width="40" height="40"/>&nbsp;
+   <img src="https://github.com/devicons/devicon/blob/master/icons/mongodb/mongodb-original-wordmark.svg" title="NodeJS" alt="NodeJS" width="40" height="40"/>&nbsp;
+   <img src="https://github.com/devicons/devicon/blob/master/icons/nginx/nginx-original.svg" title="NodeJS" alt="NodeJS" width="40" height="40"/>&nbsp;
+    <img src="https://github.com/devicons/devicon/blob/master/icons/npm/npm-original-wordmark.svg" title="NodeJS" alt="NodeJS" width="40" height="40"/>&nbsp;
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ ### 💻Установка зависимостей
+- npm init – установить зависимости проекта
+- npm start – запуск devServer на http://localhost:3000/
+- npm build – production сборка проекта
