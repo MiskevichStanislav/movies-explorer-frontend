@@ -47,6 +47,7 @@
 
 @media screen and (max-width: 1140px) {
     .techs {
+        background-color: #202020;
         padding: calc(90px + (100 - 90) * ((100vw - 768px) / (1140 - 768))) 0;
     }
 
