@@ -1,5 +1,7 @@
 import { useHistory } from "react-router-dom";
+
 import './AuthLayout.css';
+
 import Logo from "../../components/Logo/Logo";
 
 

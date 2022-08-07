@@ -1,38 +1,52 @@
-import { useState } from "react";
+import { useValidationForm } from '../../hooks/useValidationForm'
+
 import './Register.css';
+
 import Authorization from "../Authorization/Authorization";
 import Field from "../Field/Field";
+import ValidText from "../../components/ValidText/ValidText";
 
-
-function Register() {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+function Register({ handleRegister }) {
+    const { values, errors, isValid, handleChange } = useValidationForm()
+    const patternName = '([A-Za-zа-яёА-ЯЁ]| |-)*'
 
     function handleSubmitForm(evt) {
         evt.preventDefault()
-        console.log(name, email, password);
+        handleRegister(values)
     }
     return (
-        <form className="form form-register" onSubmit={handleSubmitForm} name='register'>
+        <form className="form form-register" onSubmit={handleSubmitForm} name='register' noValidate>
             <Field
                 text='Имя'
-                value={name}
-                setValue={setName}
+                name="name"
+                onInput={handleChange}
+                isValid={!errors.name}
+                value={values.name}
+                pattern={patternName}
+                title='Имя может состоять из букв, пробелов и -'
             />
+            {errors.name && <ValidText type='auth'>{errors.name}</ValidText>}
             <Field
                 text='E-mail'
+                name="email"
                 type='email'
-                value={email}
-                setValue={setEmail}
+                onInput={handleChange}
+                isValid={!errors.email}
+                value={values.email}
             />
+            {errors.email && <ValidText type='auth'>{errors.email}</ValidText>}
             <Field
                 text='Пароль'
+                name="password"
                 type='password'
-                value={password}
-                setValue={setPassword}
+                onInput={handleChange}
+                isValid={!errors.password}
+                value={values.password}
             />
-            <Authorization />
+            {errors.password && <ValidText type='auth'>{errors.password}</ValidText>}
+            <Authorization
+                isDisabled={!isValid}
+            />
         </form>
     );
 }

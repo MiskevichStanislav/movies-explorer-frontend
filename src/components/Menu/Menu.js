@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
+
 import './Menu.css';
+
 import AccountButton from '../AccountButton/AccountButton';
 
 function Menu({ isShowMenu, setIsShowMenu }) {

@@ -5,11 +5,14 @@
 }
 
 .card-movies__image {
-    background-image: url("../../images/film.jpg");
     height: 236px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+
+.card-movies__trailer-link:hover {
+    opacity: 1;
 }
 
 .card-movies__description {

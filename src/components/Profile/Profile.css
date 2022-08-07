@@ -41,13 +41,17 @@
 }
 
 .profile__input {
-    padding: 10px 0;
+    padding: 10px;
     border: none;
     text-align: right;
     background-color: transparent;
     color: inherit;
     width: 100%;
     font-size: 11px;
+}
+.profile__button_disabled {
+    opacity: 0.5;
+    cursor: default;
 }
 
 .profile__buttons {

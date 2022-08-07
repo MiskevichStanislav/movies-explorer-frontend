@@ -1,15 +1,22 @@
+import { useContext } from "react";
+
 import { useHistory, Link } from "react-router-dom";
 
 import './Header.css';
+
 import Logo from '../Logo/Logo';
 import Navigation from "../Navigation/Navigation";
 import AccountButton from "../AccountButton/AccountButton";
-import { useState } from "react";
 
-function Header() {
+
+
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
+
+function Header({ setIsShowMenu }) {
+
+    const { isLoggedIn } = useContext(CurrentUserContext)
     const currentPath = useHistory().location.pathname;
     const isMainPage = currentPath === '/';
-    const [isLoggedIn] = useState(false);
 
     const buttons = isLoggedIn ? (
         <AccountButton />
@@ -19,6 +26,10 @@ function Header() {
             <Link className="header__button header__button_color_green" to='/signin'>Войти</Link>
         </div>
     )
+
+    function handleClickMenuButton() {
+        setIsShowMenu(true)
+    }
 
     return (
         <header
@@ -30,7 +41,7 @@ function Header() {
                     <Logo />
                     {isLoggedIn && <Navigation />}
                     {buttons}
-                    {isLoggedIn && <div className="header__menu-button"></div>}
+                    {isLoggedIn && <div className="header__menu-button" onClick={handleClickMenuButton}></div>}
                 </div>
             </div>
         </header >
