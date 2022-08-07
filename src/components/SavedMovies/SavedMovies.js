@@ -4,11 +4,12 @@ import './SavedMovies.css';
 
 import SearchForm from '../../components/SearchForm/SearchForm';
 import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
+import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout';
 
 import { filterFilms } from '../../utils/filterFilms'
 
-function SavedMovies({ getSelectFilms, handleClickSelectButton }) {
-    const [films, setFilms] = useState([])
+function SavedMovies({ getSelectFilms, handleClickSelectButton, setIsShowMenu }) {
+    const [films, setAllFilms] = useState([])
     const [viewFilms, setViewFilms] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [message, setMessage] = useState('')
@@ -27,10 +28,7 @@ function SavedMovies({ getSelectFilms, handleClickSelectButton }) {
     function getFilms() {
         setIsLoading(true)
         getSelectFilms()
-            .then(films => {
-                setFilms(films)
-                setViewFilms(films)
-            })
+            .then(setAllFilms)
             .catch(() => {
                 setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
             })
@@ -50,10 +48,7 @@ function SavedMovies({ getSelectFilms, handleClickSelectButton }) {
 
     function deleteFilm(filmId) {
         handleClickSelectButton(filmId)
-            .then(() => {
-                setFilms(films.filter(film => film._id !== filmId))
-                setViewFilms(films.filter(film => film._id !== filmId))
-            })
+            .then(() => setAllFilms(films.filter(film => film._id !== filmId)))
     }
     function showNotFoundMessage() {
         setMessage('Ничего не найдено')
@@ -67,20 +62,24 @@ function SavedMovies({ getSelectFilms, handleClickSelectButton }) {
 
 
     return (
-        <div className="saved">
-            <div className="container movies__container">
-                <SearchForm
-                    type="saved-movies"
-                    searchFilms={searchFilms}
-                />
-                <MoviesCardList
-                    films={viewFilms}
-                    isLoading={isLoading}
-                    message={message}
-                    handleClickSelectButton={deleteFilm}
-                />
+        <HeaderAndFooterLayout
+            setIsShowMenu={setIsShowMenu}
+        >
+            <div className="saved">
+                <div className="container movies__container">
+                    <SearchForm
+                        searchFilms={searchFilms}
+                        type="saved-movies"
+                    />
+                    <MoviesCardList
+                        films={viewFilms}
+                        isLoading={isLoading}
+                        message={message}
+                        handleClickSelectButton={deleteFilm}
+                    />
+                </div>
             </div>
-        </div>
+        </HeaderAndFooterLayout>
     );
 }
 

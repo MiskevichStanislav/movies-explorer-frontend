@@ -10,11 +10,8 @@ import Login from '../../components/Login/Login';
 import SavedMovies from '../../components/SavedMovies/SavedMovies';
 import Main from '../../components/Main/Main';
 import NotFound from '../../pages/NotFound/NotFound_404';
-import HeaderLayout from "../../layouts/HeaderLayout/HeaderLayout";
-import HeaderAndFooterLayout from "../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout";
-import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 import Menu from "../Menu/Menu";
-// import Alarm from "../Alarm/Alarm";
+import Alarm from "../Alarm/Alarm";
 
 import ProtectedRoute from "../../components/ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
@@ -30,6 +27,8 @@ function App() {
   const [loaderButton, setLoaderButton] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isFetchError, setIsFetchError] = useState(false)
+
+  const [isPreloader, setIsPreloader] = useState(true)
 
   const history = useHistory()
   const location = useLocation()
@@ -53,12 +52,12 @@ function App() {
     handleLoginToken()
   }, [])
 
- 
+
   function getAllFilms() {
     return moviesApi.getFilms()
   }
 
- 
+
   function handleRegister({ name, email, password }) {
     setLoaderButton(true)
     setIsFetchError(false)
@@ -74,7 +73,7 @@ function App() {
       })
   }
 
- 
+
   function handleLogin(user) {
     setLoaderButton(true)
     setIsFetchError(false)
@@ -82,8 +81,11 @@ function App() {
       .then(res => {
         const token = res.token
         setToken(token)
+        setIsLoggedIn(true)
         jwtLocal.save(token)
         getUserInfo(token)
+        history.push('/movies')
+
       })
       .catch(() => {
         setIsFetchError(true)
@@ -96,9 +98,11 @@ function App() {
   function getUserInfo(token) {
     mainApi.getUserInfo(token)
       .then(user => {
-        setIsLoggedIn(true)
+        if (!isLoggedIn) setIsLoggedIn(true)
         setCurrentUser(user)
-        history.push('/movies')
+      })
+      .finally(() => {
+        setIsPreloader(false)
       })
   }
 
@@ -122,10 +126,12 @@ function App() {
     if (token) {
       setToken(token)
       getUserInfo(token)
+    } else {
+      setIsPreloader(false)
     }
   }
 
- 
+
   function handleClickSelectButton(filmId, film) {
     return filmId
       ? mainApi.deleteSelectFilm(filmId, token)
@@ -140,75 +146,51 @@ function App() {
     <>
       <CurrentUserContext.Provider value={{ loaderButton, isLoggedIn, currentUser, isFetchError }}>
         <Switch>
-          <Route path='/movies' exact>
-            <ProtectedRoute
-              isLoggedIn={isLoggedIn}
-            >
-              <HeaderAndFooterLayout
-                setIsShowMenu={setIsShowMenu}
-              >
-                <Movies
-                  getAllFilms={getAllFilms}
-                  handleClickSelectButton={handleClickSelectButton}
-                  getSelectFilms={getSelectFilms}
-                />
-              </HeaderAndFooterLayout>
-            </ProtectedRoute>
-          </Route>
+          <ProtectedRoute
+            path='/movies'
+            exact
+            isLoggedIn={isLoggedIn}
+            getAllFilms={getAllFilms}
+            handleClickSelectButton={handleClickSelectButton}
+            getSelectFilms={getSelectFilms}
+            setIsShowMenu={setIsShowMenu}
+            component={Movies}
+            isPreloader={isPreloader}
+          />
 
-          <Route path='/saved-movies' exact>
-            <ProtectedRoute
-              isLoggedIn={isLoggedIn}
-            >
-              <HeaderAndFooterLayout
-                setIsShowMenu={setIsShowMenu}
-              >
-                <SavedMovies
-                  handleClickSelectButton={handleClickSelectButton}
-                  getSelectFilms={getSelectFilms}
-                />
-              </HeaderAndFooterLayout>
-            </ProtectedRoute>
-          </Route>
+          <ProtectedRoute
+            path='/saved-movies'
+            exact
+            isLoggedIn={isLoggedIn}
+            handleClickSelectButton={handleClickSelectButton}
+            getSelectFilms={getSelectFilms}
+            setIsShowMenu={setIsShowMenu}
+            component={SavedMovies}
+            isPreloader={isPreloader}
+          />
 
-          <Route path='/profile' exact>
-            <ProtectedRoute
-              isLoggedIn={isLoggedIn}
-            >
-              <HeaderLayout
-                setIsShowMenu={setIsShowMenu}
-              >
-                <Profile
-                  handleUpdateUser={handleUpdateUser}
-                  handleSignOut={handleSignOut}
-                  currentUser={currentUser}
-                />
-              </HeaderLayout>
-            </ProtectedRoute>
-          </Route>
+          <ProtectedRoute
+            path='/profile'
+            exact
+            isLoggedIn={isLoggedIn}
+            handleUpdateUser={handleUpdateUser}
+            handleSignOut={handleSignOut}
+            currentUser={currentUser}
+            setIsShowMenu={setIsShowMenu}
+            component={Profile}
+            isPreloader={isPreloader}
+          />
 
           <Route path='/signin' exact>
-            <AuthLayout>
-              <Login
-                handleLogin={handleLogin}
-              />
-            </AuthLayout>
+            <Login handleLogin={handleLogin} />
           </Route>
 
           <Route path='/signup' exact>
-            <AuthLayout>
-              <Register
-                handleRegister={handleRegister}
-              />
-            </AuthLayout>
+            <Register handleRegister={handleRegister} />
           </Route>
 
           <Route path='/' exact>
-            <HeaderAndFooterLayout
-              setIsShowMenu={setIsShowMenu}
-            >
-              <Main />
-            </HeaderAndFooterLayout>
+            <Main setIsShowMenu={setIsShowMenu} />
           </Route>
 
           <Route path='*'>
@@ -222,7 +204,7 @@ function App() {
         />
       </CurrentUserContext.Provider>
 
-      </>
+    </>
   );
 }
 

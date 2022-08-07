@@ -4,26 +4,28 @@ import './Movies.css';
 
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
+import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout';
+
 import LoacalStorage from '../../utils/LocalStorage';
 import { filterFilms } from '../../utils/filterFilms'
 import { useCountCard } from '../../hooks/useCountCard'
 
-function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton }) {
-  
+function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton, setIsShowMenu }) {
+
     const [films, setFilms] = useState([])
- 
+
     const [viewFilms, setViewFilms] = useState([])
- 
+
     const [isLoading, setIsLoading] = useState(false)
-   
+
     const [message, setMessage] = useState('')
 
     const { countFilms, startCountFilms, setParamsCountFilms } = useCountCard(3, 12)
 
- 
+
     const filmsLocal = new LoacalStorage('films')
 
-   
+
     useEffect(() => {
         setFilmsWhitSelect(filmsLocal.load())
         setParamsCountFilms('all')
@@ -38,7 +40,7 @@ function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton }) {
         setViewFilms([...films.slice(0, startCountFilms)])
     }, [films, startCountFilms])
 
-  
+
     function showMoreFilms() {
         const startIndex = viewFilms.length
         const endIndex = startIndex + countFilms
@@ -74,8 +76,8 @@ function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton }) {
         getSelectFilms()
             .then(savedFilms => {
                 const selectFilms = savedFilms.map(film => ({
-                    filmId: film.movieId,
-                    selectId: film._id
+                    movieId: film.movieId,
+                    _id: film._id
                 }))
 
                 const filmsWithSelect = films.map(film => {
@@ -83,8 +85,8 @@ function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton }) {
                     let _id = ''
 
                     selectFilms.forEach(selectFilm => {
-                        isSelectFilm = film.id === selectFilm.filmId
-                        if (isSelectFilm) _id = selectFilm.selectId
+                        isSelectFilm = film.id === selectFilm.movieId
+                        if (isSelectFilm) _id = selectFilm._id
                     })
 
                     return { ...film, _id }
@@ -97,25 +99,30 @@ function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton }) {
 
 
     return (
-        <div className="movies">
-            <div className="container movies__container">
-                <SearchForm
-                    searchFilms={searchFilms}
-                    type='movies'
-                />
-                <MoviesCardList
-                    films={viewFilms}
-                    isLoading={isLoading}
-                    message={message}
-                    handleClickSelectButton={handleClickSelectButton}
-                />
-                {films.length > 3 && films.length !== viewFilms.length && <button
-                    className="movies__next-button"
-                    type='button'
-                    onClick={() => showMoreFilms()}
-                >Ещё</button>}
-            </div>
-        </div>
+        <HeaderAndFooterLayout
+            setIsShowMenu={setIsShowMenu}
+        >
+            <div className="movies">
+                <div className="container movies__container">
+                    <SearchForm
+                        searchFilms={searchFilms}
+                        type='movies'
+                    />
+                    <MoviesCardList
+                        films={viewFilms}
+                        isLoading={isLoading}
+                        message={message}
+                        handleClickSelectButton={handleClickSelectButton}
+                    />
+                    {films.length > 3 && films.length !== viewFilms.length && <button
+                        className="movies__next-button"
+                        type='button'
+                        onClick={() => showMoreFilms()}
+                    >Ещё</button>}
+
+                </div>
+            </div >
+        </HeaderAndFooterLayout>
     );
 }
 

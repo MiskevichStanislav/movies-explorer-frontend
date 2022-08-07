@@ -2,10 +2,11 @@ import { useState } from "react";
 
 import './Profile.css';
 import Alarm from "../../components/Alarm/Alarm";
+import HeaderLayout from "../../layouts/HeaderLayout/HeaderLayout";
 
 import { useValidationForm } from '../../hooks/useValidationForm'
 
-function Profile({ handleUpdateUser, currentUser, handleSignOut }) {
+function Profile({ handleUpdateUser, currentUser, handleSignOut, setIsShowMenu }) {
     const [showAlarm, setShowAlarm] = useState(false)
     const [messageAlarm, setMessageAlarm] = useState('')
 
@@ -38,60 +39,64 @@ function Profile({ handleUpdateUser, currentUser, handleSignOut }) {
     }
 
     return (
-        <div className="profile">
-            <div className="container profile__container">
-                <div className="profile__wrapper">
-                    <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
-                    <form className="profile__form">
-                        <label className='profile__label'>
-                            <p className="profile__text">Имя</p>
-                            <input
-                                className="profile__input"
-                                type="text"
-                                value={values.name}
-                                name="name"
-                                onInput={handleChange}
-                                required
-                                placeholder="Ваше имя"
-                            />
-                        </label>
-                        <label className='profile__label'>
-                            <p className="profile__text">E-mail</p>
-                            <input
-                                className="profile__input"
-                                type="email"
-                                value={values.email}
-                                name="email"
-                                onInput={handleChange}
-                                required
-                                placeholder="Ваш E-mail"
-                            />
-                        </label>
-                    </form>
-                    <div className="profile__buttons">
-                        <button
-                            className={
-                                isValid
-                                    ? 'profile__button'
-                                    : 'profile__button profile__button_disabled'
-                            }
-                            type="button"
-                            onClick={clickUpdateButton}
-                            disabled={!isValid}
-                        >Редактировать</button>
-                        <button
-                            className='profile__button profile__button_color_red'
-                            type="button"
-                            onClick={clickSignOutButton}
-                        >Выйти из аккаунта</button>
+        <HeaderLayout
+            setIsShowMenu={setIsShowMenu}
+        >
+            <div className="profile">
+                <div className="container profile__container">
+                    <div className="profile__wrapper">
+                        <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
+                        <form className="profile__form">
+                            <label className='profile__label'>
+                                <p className="profile__text">Имя</p>
+                                <input
+                                    className="profile__input"
+                                    type="text"
+                                    value={values.name}
+                                    name="name"
+                                    onInput={handleChange}
+                                    required
+                                    placeholder="Ваше имя"
+                                />
+                            </label>
+                            <label className='profile__label'>
+                                <p className="profile__text">E-mail</p>
+                                <input
+                                    className="profile__input"
+                                    type="email"
+                                    value={values.email}
+                                    name="email"
+                                    onInput={handleChange}
+                                    required
+                                    placeholder="Ваш E-mail"
+                                />
+                            </label>
+                        </form>
+                        <div className="profile__buttons">
+                            <button
+                                className={
+                                    isValid
+                                        ? 'profile__button'
+                                        : 'profile__button profile__button_disabled'
+                                }
+                                type="button"
+                                onClick={clickUpdateButton}
+                                disabled={!isValid}
+                            >Редактировать</button>
+                            <button
+                                className='profile__button profile__button_color_red'
+                                type="button"
+                                onClick={clickSignOutButton}
+                            >Выйти из аккаунта</button>
+                        </div>
                     </div>
                 </div>
+                <Alarm
+                    showAlarm={showAlarm}
+                    messageAlarm={messageAlarm}
+                />
             </div>
-            <Alarm
-                showAlert={showAlarm}
-                messageAlert={messageAlarm}
-            />
-        </div>
+        </HeaderLayout>
     );
 }
 
