@@ -35,7 +35,7 @@ function SearchForm({ searchFilms, type }) {
     function handleSubmitForm(evt) {
         evt.preventDefault()
         searchQueryLocal.save(values)
-        
+
 
         if (!isValid) {
             setIsSearchError(true)
@@ -58,21 +58,20 @@ function SearchForm({ searchFilms, type }) {
                     required
                 />
                 <button className="forms-search__button" type="submit">Найти</button>
-
-                <label className="forms-search__label" >
-                    <input
-                        className="forms-search__checkbox"
-                        type="checkbox"
-                        name='short'
-                        checked={values.short}
-                        onChange={onChangeCheckbox}
-                    />
-                    <div className="forms-search__custom-checkbox">
-                        <div className="forms-search__marking"></div>
-                    </div>
-                    <p className="forms-search__label-text">Короткометражки</p>
-                </label>
             </form>
+            <label className="forms-search__label" >
+                <input
+                    className="forms-search__checkbox"
+                    type="checkbox"
+                    name='short'
+                    checked={values.short}
+                    onChange={onChangeCheckbox}
+                />
+                <div className="forms-search__custom-checkbox">
+                    <div className="forms-search__marking"></div>
+                </div>
+                <p className="forms-search__label-text">Короткометражки</p>
+            </label>
             {isSearchError && <ValidText type='search'>Нужно ввести ключевое слово</ValidText>}
         </section >
     );

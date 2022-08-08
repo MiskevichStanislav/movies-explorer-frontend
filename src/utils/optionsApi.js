@@ -1,5 +1,5 @@
 export const optionsMainApi = {
-    baseUrl: 'http://localhost:3000', //https://mydiplomapi.nomoredomains.xyz/
+    baseUrl: 'https://mydiplomapi.nomoredomains.xyz',
     headers: {
         'Content-Type': 'application/json'
     }
