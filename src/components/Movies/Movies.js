@@ -9,7 +9,7 @@ import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAnd
 import LoacalStorage from '../../utils/LocalStorage';
 import { filterFilms } from '../../utils/filterFilms'
 import { formatSelectedFilms, setSelect } from '../../utils/select'
-import { MESSAGES } from '../../utils/constants'
+import { MESSAGES, CARD_COUNT, SHORT_DURATION } from '../../utils/constants'
 import { useCountCard } from '../../hooks/useCountCard'
 
 function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton, setIsShowMenu }) {
@@ -19,7 +19,8 @@ function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton, setIsSho
     const [viewFilms, setViewFilms] = useState([null])
     const [isLoading, setIsLoading] = useState(false)
     const [message, setMessage] = useState(null)
-    const { countFilms, startCountFilms, setParamsCountFilms } = useCountCard(3, 12)
+
+    const { countAddFilms, startCountFilms, setParamsCountFilms } = useCountCard(CARD_COUNT)
 
     const filmsLocal = new LoacalStorage('films')
 
@@ -57,7 +58,7 @@ function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton, setIsSho
 
     useEffect(() => {
         if (values && allFilms) {
-            const filtredFilms = filterFilms(allFilms.all, values)
+            const filtredFilms = filterFilms(allFilms.all, SHORT_DURATION, values)
             const isNotFiltredFilms = !filtredFilms.length
             if (isNotFiltredFilms) setMessage(MESSAGES.NOT_FOUND)
 
@@ -79,7 +80,7 @@ function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton, setIsSho
 
     function showMoreFilms() {
         const startIndex = viewFilms.length
-        const endIndex = startIndex + countFilms
+        const endIndex = startIndex + countAddFilms
 
         setViewFilms([...viewFilms, ...films.slice(startIndex, endIndex)])
     }

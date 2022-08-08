@@ -18,6 +18,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import MainApi from "../../utils/MainApi";
 import MoviesApi from '../../utils/MoviesApi';
 import { optionsMainApi, optionsMoviesApi } from '../../utils/optionsApi'
+import { PAGES } from '../../utils/constants'
 import LocalStorage from "../../utils/LocalStorage";
 
 function App() {
@@ -147,7 +148,7 @@ function App() {
       <CurrentUserContext.Provider value={{ loaderButton, isLoggedIn, currentUser, isFetchError }}>
         <Switch>
           <ProtectedRoute
-            path='/movies'
+            path={PAGES.MOVIES}
             exact
             isLoggedIn={isLoggedIn}
             getAllFilms={getAllFilms}
@@ -159,7 +160,7 @@ function App() {
           />
 
           <ProtectedRoute
-            path='/saved-movies'
+            path={PAGES.SAVED_MOVIES}
             exact
             isLoggedIn={isLoggedIn}
             handleClickSelectButton={handleClickSelectButton}
@@ -170,7 +171,7 @@ function App() {
           />
 
           <ProtectedRoute
-            path='/profile'
+            path={PAGES.PROFILE}
             exact
             isLoggedIn={isLoggedIn}
             handleUpdateUser={handleUpdateUser}
@@ -181,15 +182,25 @@ function App() {
             isPreloader={isPreloader}
           />
 
-          <Route path='/signin' exact>
-            <Login handleLogin={handleLogin} />
-          </Route>
+          <ProtectedRoute
+            path={PAGES.SIGNIN}
+            exact
+            isLoggedIn={!isLoggedIn}
+            handleLogin={handleLogin}
+            component={Login}
+            isPreloader={isPreloader}
+          />
 
-          <Route path='/signup' exact>
-            <Register handleRegister={handleRegister} />
-          </Route>
+          <ProtectedRoute
+            path={PAGES.SIGNUP}
+            exact
+            isLoggedIn={!isLoggedIn}
+            handleRegister={handleRegister}
+            component={Register}
+            isPreloader={isPreloader}
+          />
 
-          <Route path='/' exact>
+          <Route path={PAGES.MAIN} exact>
             <Main setIsShowMenu={setIsShowMenu} />
           </Route>
 

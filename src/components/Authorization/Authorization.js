@@ -6,13 +6,12 @@ import './Authorization.css';
 import ValidText from "../../components/ValidText/ValidText";
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
+import { PAGES } from '../../utils/constants'
 
 function Authorization({ isDisabled }) {
     const { loaderButton, isFetchError } = useContext(CurrentUserContext)
 
-    const currentPath = useHistory().location.pathname
-    const isSignIn = currentPath === '/signin'
-    const link = isSignIn ? '/signup' : '/signin'
+    const isSignIn = useHistory().location.pathname === PAGES.SIGNIN
     const textButton = isSignIn
         ? loaderButton ? 'Вход...' : 'Войти'
         : loaderButton ? 'Регистрация...' : 'Зарегистрироваться'
@@ -22,7 +21,7 @@ function Authorization({ isDisabled }) {
             <p className="authorization__text">
                 {isSignIn ? 'Ещё не зарегистрированы?' : 'Уже зарегистрированы?'}
             </p>
-            <Link className="authorization__link" to={link}>
+            <Link className="authorization__link" to={isSignIn ? PAGES.SIGNUP : PAGES.SIGNIN}>
                 {isSignIn ? 'Регистрация' : 'Войти'}
             </Link>
         </div>

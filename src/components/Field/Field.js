@@ -1,7 +1,9 @@
 import './Field.css';
 
+import { INPUTS } from '../../utils/constants'
+
 function Field({ text, name, type = 'text', onInput, isValid, value, pattern, title }) {
-    const isPassword = type === 'password'
+    const isPassword = type === INPUTS.PASSWORD
 
     function getPlaceholder(text) {
         const lowerText = text.toLowerCase()

@@ -7,7 +7,7 @@ import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
 import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout';
 
 import { filterFilms } from '../../utils/filterFilms'
-import { MESSAGES } from '../../utils/constants'
+import { MESSAGES, SHORT_DURATION } from '../../utils/constants'
 
 function SavedMovies({ getSelectFilms, handleClickSelectButton, setIsShowMenu }) {
     const [films, setAllFilms] = useState([])
@@ -39,7 +39,7 @@ function SavedMovies({ getSelectFilms, handleClickSelectButton, setIsShowMenu })
     }
 
     function searchFilms(values) {
-        const filterFilmsList = filterFilms(films, values)
+        const filterFilmsList = filterFilms(films, SHORT_DURATION, values)
         setMessage('')
         setViewFilms(filterFilmsList)
         if (!filterFilmsList.length) {
