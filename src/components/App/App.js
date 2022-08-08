@@ -11,7 +11,6 @@ import SavedMovies from '../../components/SavedMovies/SavedMovies';
 import Main from '../../components/Main/Main';
 import NotFound from '../../pages/NotFound/NotFound_404';
 import Menu from "../Menu/Menu";
-import Alarm from "../Alarm/Alarm";
 
 import ProtectedRoute from "../../components/ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
@@ -158,6 +157,7 @@ function App() {
             setIsShowMenu={setIsShowMenu}
             component={Movies}
             isPreloader={isPreloader}
+            filmsLocal={filmsLocal}
           />
 
           <ProtectedRoute

@@ -11,7 +11,7 @@ import { formatSelectedFilms, setSelect } from '../../utils/select'
 import { MESSAGES, CARD_COUNT, CARD_BRAKEPOINT, SHORT_DURATION } from '../../utils/constants'
 import { useCountCard } from '../../hooks/useCountCard'
 
-function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, setIsShowMenu, filmsLocal }) {
+function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, setIsShowMenu, filmsLocal, searchQueryMoviesLocal }) {
     const [allFilms, setAllFilms] = useState(null)
     const [selectedFilms, setSelectedFilms] = useState(null)
     const [filtredFilms, setFiltredFilms] = useState(null)
@@ -42,6 +42,7 @@ function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, 
             const films = filterFilms(allFilms, SHORT_DURATION, queryValues)
             saveFilmsLocal(films)
             setFiltredFilms(films)
+
             films?.length ? hideErrorMessage() : showErrorMessage(MESSAGES.NOT_FOUND)
         }
     }, [allFilms, queryValues])
@@ -141,6 +142,7 @@ function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, 
                 <div className="container movies__container">
                     <SearchForm
                         searchFilms={searchFilms}
+                        searchQueryLocal={searchQueryMoviesLocal}
                         type='movies'
                     />
                     <MoviesCardList

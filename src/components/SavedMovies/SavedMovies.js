@@ -9,74 +9,86 @@ import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAnd
 import { filterFilms } from '../../utils/filterFilms'
 import { MESSAGES, SHORT_DURATION } from '../../utils/constants'
 
-function SavedMovies({ requestSelectFilms, handleClickSelectButton, setIsShowMenu }) {
-    const [films, setAllFilms] = useState([])
-    const [viewFilms, setViewFilms] = useState([])
+function SavedMovies({ requestSelectFilms, handleClickSelectButton, setIsShowMenu, searchQuerySavedMoviesLocal }) {
+    const [selectedFilms, setSelectedFilms] = useState(null)
+    const [displayedFilms, setDisplayedFilms] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
-    const [message, setMessage] = useState('')
 
     useEffect(() => {
-        getFilms()
+        getSelectFilms()
     }, [])
-
-    useEffect(() => {
-        setMessage('')
-        if (!films.length) {
-            showNotFoundMessage()
-        }
-    }, [films])
-
-    function getFilms() {
-        setIsLoading(true)
+        
+    function getSelectFilms() {
+        startLoader()
         requestSelectFilms()
-            .then(setAllFilms)
+            .then(films => {
+                setAllFilms(films)
+                hideErrorMessage()
+            })
             .catch(() => {
-                setMessage(MESSAGES.ERROR)
+                showErrorMessage(MESSAGES.ERROR)
             })
             .finally(() => {
-                setIsLoading(false)
+                stopLoader()
             })
     }
 
     function searchFilms(values) {
-        const filterFilmsList = filterFilms(films, SHORT_DURATION, values)
-        setMessage('')
-        setViewFilms(filterFilmsList)
-        if (!filterFilmsList.length) {
-            showNotFoundMessage()
-        }
-    }
+        const films = filterFilms(selectedFilms, SHORT_DURATION, values)
+        setDisplayedFilms(films)
 
-    function deleteFilm(filmId) {
-        handleClickSelectButton(filmId)
-            .then(() => setAllFilms(films.filter(film => film._id !== filmId)))
-    }
-    function showNotFoundMessage() {
-        setMessage(MESSAGES.NOT_FOUND)
-        setViewFilms([])
+        films?.length ? hideErrorMessage() : showErrorMessage(MESSAGES.NOT_FOUND)
     }
 
 
-    return (
-        <HeaderAndFooterLayout
-            setIsShowMenu={setIsShowMenu}
-        >
-            <div className="saved">
-                <div className="container movies__container">
-                    <SearchForm
-                        searchFilms={searchFilms}
-                        type="saved-movies"
-                    />
-                    <MoviesCardList
-                        films={viewFilms}
-                        isLoading={isLoading}
-                        message={message}
-                        handleClickSelectButton={deleteFilm}
-                    />
-                </div>
+function handleDeleteFilm(filmId) {
+    handleClickSelectButton(filmId)
+        .then(() => setAllFilms(selectedFilms.filter(film => film._id !== filmId)))
+}
+
+function setAllFilms(films) {
+    setSelectedFilms(films)
+    setDisplayedFilms(films)
+}
+
+function startLoader() {
+    setIsLoading(true)
+}
+
+function stopLoader() {
+    setIsLoading(false)
+}
+
+function showErrorMessage(message) {
+    setErrorMessage(message)
+    }
+    
+function hideErrorMessage() {
+    setErrorMessage(null)
+}
+
+
+return (
+    <HeaderAndFooterLayout
+        setIsShowMenu={setIsShowMenu}
+    >
+        <div className="saved">
+            <div className="container movies__container">
+                <SearchForm
+                    searchFilms={searchFilms}
+                    searchQueryLocal={searchQuerySavedMoviesLocal}
+                />
+                <MoviesCardList
+                    films={displayedFilms}
+                    isLoading={isLoading}
+                    message={errorMessage}
+                    handleClickSelectButton={handleDeleteFilm}
+                />
             </div>
-        </HeaderAndFooterLayout>
-    );
+        </div>
+    </HeaderAndFooterLayout>
+);
 }
 
 export default SavedMovies;
