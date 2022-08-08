@@ -40,7 +40,7 @@ export default class MainApi {
         return this._fetch('/users/me', 'GET', null, token)
     }
 
-    getSelectFilms(token) {
+    fetchSelectFilms(token) {
         return this._fetch('/movies', 'GET', null, token)
     }
 

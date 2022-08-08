@@ -37,6 +37,7 @@ function App() {
   const mainApi = new MainApi(optionsMainApi)
   const moviesApi = new MoviesApi(optionsMoviesApi)
   const jwtLocal = new LocalStorage('jwt')
+  const filmsLocal = new LocalStorage('films')
 
   useEffect(() => {
     isShowMenu
@@ -54,7 +55,7 @@ function App() {
   }, [])
 
 
-  function getAllFilms() {
+  function requestAllFilms() {
     return moviesApi.getFilms()
   }
 
@@ -85,7 +86,7 @@ function App() {
         setIsLoggedIn(true)
         jwtLocal.save(token)
         getUserInfo(token)
-        history.push('/movies')
+        history.push(PAGES.MOVIES)
 
       })
       .catch(() => {
@@ -119,7 +120,7 @@ function App() {
     setToken('')
     setCurrentUser({})
     jwtLocal.delete()
-    history.push('/')
+    history.push(PAGES.MAIN)
   }
 
   function handleLoginToken() {
@@ -139,8 +140,8 @@ function App() {
       : mainApi.addSelectFilm(film, token)
   }
 
-  function getSelectFilms() {
-    return mainApi.getSelectFilms(token)
+  function requestSelectFilms() {
+    return mainApi.fetchSelectFilms(token)
   }
 
   return (
@@ -151,9 +152,9 @@ function App() {
             path={PAGES.MOVIES}
             exact
             isLoggedIn={isLoggedIn}
-            getAllFilms={getAllFilms}
+            requestAllFilms={requestAllFilms}
             handleClickSelectButton={handleClickSelectButton}
-            getSelectFilms={getSelectFilms}
+            requestSelectFilms={requestSelectFilms}
             setIsShowMenu={setIsShowMenu}
             component={Movies}
             isPreloader={isPreloader}
@@ -164,7 +165,7 @@ function App() {
             exact
             isLoggedIn={isLoggedIn}
             handleClickSelectButton={handleClickSelectButton}
-            getSelectFilms={getSelectFilms}
+            requestSelectFilms={requestSelectFilms}
             setIsShowMenu={setIsShowMenu}
             component={SavedMovies}
             isPreloader={isPreloader}

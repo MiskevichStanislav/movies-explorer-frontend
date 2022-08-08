@@ -9,7 +9,7 @@ import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAnd
 import { filterFilms } from '../../utils/filterFilms'
 import { MESSAGES, SHORT_DURATION } from '../../utils/constants'
 
-function SavedMovies({ getSelectFilms, handleClickSelectButton, setIsShowMenu }) {
+function SavedMovies({ requestSelectFilms, handleClickSelectButton, setIsShowMenu }) {
     const [films, setAllFilms] = useState([])
     const [viewFilms, setViewFilms] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -28,7 +28,7 @@ function SavedMovies({ getSelectFilms, handleClickSelectButton, setIsShowMenu })
 
     function getFilms() {
         setIsLoading(true)
-        getSelectFilms()
+        requestSelectFilms()
             .then(setAllFilms)
             .catch(() => {
                 setMessage(MESSAGES.ERROR)
