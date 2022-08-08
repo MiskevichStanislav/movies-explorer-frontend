@@ -7,9 +7,11 @@ import Field from "../Field/Field";
 import ValidText from "../../components/ValidText/ValidText";
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 
+import { INPUTS, PATTERNS } from '../../utils/constants'
+
 function Register({ handleRegister }) {
-    const { values, errors, isValid, handleChange } = useValidationForm()
-    const patternName = '([A-Za-zа-яёА-ЯЁ]| |-)*'
+    const { values, errors, isValid, handleChange } = useValidationForm({ name: '', email: '', password: '' })
+
 
     function handleSubmitForm(evt) {
         evt.preventDefault()
@@ -20,32 +22,32 @@ function Register({ handleRegister }) {
             <form className="form form-register" onSubmit={handleSubmitForm} name='register' noValidate>
                 <Field
                     text='Имя'
-                    name="name"
+                    name={INPUTS.NAME}
                     onInput={handleChange}
-                    isValid={!errors.name}
-                    value={values.name}
-                    pattern={patternName}
+                    isValid={!errors[INPUTS.NAME]}
+                    value={values[INPUTS.NAME]}
+                    pattern={PATTERNS.NAME}
                     title='Имя может состоять из букв, пробелов и -'
                 />
-                {errors.name && <ValidText type='auth'>{errors.name}</ValidText>}
+                {errors[INPUTS.NAME] && <ValidText type='auth'>{errors[INPUTS.NAME]}</ValidText>}
                 <Field
                     text='E-mail'
-                    name="email"
-                    type='email'
+                    name={INPUTS.EMAIL}
+                    type={INPUTS.EMAIL}
                     onInput={handleChange}
-                    isValid={!errors.email}
-                    value={values.email}
+                    isValid={!errors[INPUTS.EMAIL]}
+                    value={values[INPUTS.EMAIL]}
                 />
-                {errors.email && <ValidText type='auth'>{errors.email}</ValidText>}
+                {errors[INPUTS.EMAIL] && <ValidText type='auth'>{errors[INPUTS.EMAIL]}</ValidText>}
                 <Field
                     text='Пароль'
-                    name="password"
-                    type='password'
+                    name={INPUTS.PASSWORD}
+                    type={INPUTS.PASSWORD}
                     onInput={handleChange}
-                    isValid={!errors.password}
-                    value={values.password}
+                    isValid={!errors[INPUTS.PASSWORD]}
+                    value={values[INPUTS.PASSWORD]}
                 />
-            {errors.password && <ValidText type='auth'>{errors.password}</ValidText>}
+                {errors[INPUTS.PASSWORD] && <ValidText type='auth'>{errors[INPUTS.PASSWORD]}</ValidText>}
             <Authorization
                 isDisabled={!isValid}
             />

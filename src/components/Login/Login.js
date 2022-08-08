@@ -6,9 +6,10 @@ import ValidText from "../../components/ValidText/ValidText";
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 
 import { useValidationForm } from '../../hooks/useValidationForm'
+import { INPUTS } from '../../utils/constants'
 
 function Login({ handleLogin }) {
-    const { values, errors, isValid, handleChange } = useValidationForm()
+    const { values, errors, isValid, handleChange } = useValidationForm({ email: '', password: '' })
 
     function handleSubmitForm(evt) {
         evt.preventDefault()
@@ -19,22 +20,22 @@ function Login({ handleLogin }) {
             <form className="form form-login" onSubmit={handleSubmitForm} name='login'>
                 <Field
                     text='E-mail'
-                    type='email'
-                    name='email'
+                    type={INPUTS.EMAIL}
+                    name={INPUTS.EMAIL}
                     onInput={handleChange}
-                    isValid={!errors.email}
-                    value={values.email}
+                    isValid={!errors[INPUTS.EMAIL]}
+                    value={values[INPUTS.EMAIL]}
                 />
-                {errors.email && <ValidText type='auth'>{errors.email}</ValidText>}
+                {errors[INPUTS.EMAIL] && <ValidText type='auth'>{errors[INPUTS.EMAIL]}</ValidText>}
                 <Field
                     text='Пароль'
-                    type='password'
-                    name="password"
+                    type={INPUTS.PASSWORD}
+                    name={INPUTS.PASSWORD}
                     onInput={handleChange}
-                    isValid={!errors.password}
-                    value={values.password}
+                    isValid={!errors[INPUTS.PASSWORD]}
+                    value={values[INPUTS.PASSWORD]}
                 />
-                {errors.password && <ValidText type='auth'>{errors.password}</ValidText>}
+                {errors[INPUTS.PASSWORD] && <ValidText type='auth'>{errors[INPUTS.PASSWORD]}</ValidText>}
                 <Authorization
                     isDisabled={!isValid}
                 />
