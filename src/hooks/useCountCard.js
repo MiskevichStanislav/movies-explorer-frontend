@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useCountCard(CARD_COUNT) {
+export function useCountCard(CARD_COUNT, CARD_BRAKEPOINT) {
     
     const [countAddFilms, setCountAddFilms] = useState(0)
 
@@ -8,12 +8,10 @@ export function useCountCard(CARD_COUNT) {
 
     function setParamsCountFilms(mode) {
         const deviceWidth = document.documentElement.clientWidth
-        const threeCardWidth = 1000
-        const twoCardWidth = 700
         const isUpdate = mode === 'all'
 
-        const middleDevice = deviceWidth <= threeCardWidth && deviceWidth > twoCardWidth
-        const smallDevice = deviceWidth <= twoCardWidth && deviceWidth >= 320
+        const middleDevice = deviceWidth <= CARD_BRAKEPOINT.TWO && deviceWidth > CARD_BRAKEPOINT.ONE
+        const smallDevice = deviceWidth <= CARD_BRAKEPOINT.ONE && deviceWidth >= 320
 
         if (middleDevice) {
             setCountAddFilms(CARD_COUNT.MIDDLE_DEVICE.ADD)

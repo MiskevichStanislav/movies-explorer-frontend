@@ -8,7 +8,7 @@ import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAnd
 
 import { filterFilms } from '../../utils/filterFilms'
 import { formatSelectedFilms, setSelect } from '../../utils/select'
-import { MESSAGES, CARD_COUNT, SHORT_DURATION } from '../../utils/constants'
+import { MESSAGES, CARD_COUNT, CARD_BRAKEPOINT, SHORT_DURATION } from '../../utils/constants'
 import { useCountCard } from '../../hooks/useCountCard'
 
 function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, setIsShowMenu, filmsLocal }) {
@@ -20,7 +20,7 @@ function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, 
     const [isLoading, setIsLoading] = useState(false)
     const [queryValues, setQueryValues] = useState(null)
 
-    const { countAddFilms, startCountFilms, setParamsCountFilms } = useCountCard(CARD_COUNT)
+    const { countAddFilms, startCountFilms, setParamsCountFilms } = useCountCard(CARD_COUNT, CARD_BRAKEPOINT)
 
 
     useEffect(() => {
