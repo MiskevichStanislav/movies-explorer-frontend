@@ -8,26 +8,24 @@ import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAnd
 
 import LoacalStorage from '../../utils/LocalStorage';
 import { filterFilms } from '../../utils/filterFilms'
+import { formatSelectedFilms, setSelect } from '../../utils/select'
+import { MESSAGES } from '../../utils/constants'
 import { useCountCard } from '../../hooks/useCountCard'
 
 function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton, setIsShowMenu }) {
-
-    const [films, setFilms] = useState([])
-
-    const [viewFilms, setViewFilms] = useState([])
-
+    const [allFilms, setAllFilms] = useState(null)
+    const [values, setValues] = useState(null)
+    const [films, setFilms] = useState([null])
+    const [viewFilms, setViewFilms] = useState([null])
     const [isLoading, setIsLoading] = useState(false)
-
-    const [message, setMessage] = useState('')
-
+    const [message, setMessage] = useState(null)
     const { countFilms, startCountFilms, setParamsCountFilms } = useCountCard(3, 12)
-
 
     const filmsLocal = new LoacalStorage('films')
 
 
     useEffect(() => {
-        setFilmsWhitSelect(filmsLocal.load())
+        setFilms(filmsLocal.load())
         setParamsCountFilms('all')
         window.addEventListener('resize', setParamsCountFilms)
 
@@ -36,8 +34,46 @@ function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton, setIsSho
         }
     }, [])
 
+
     useEffect(() => {
-        setViewFilms([...films.slice(0, startCountFilms)])
+        const isNotAllFilms = !allFilms?.all.length
+
+        if (isNotAllFilms && isLoading) {
+            Promise.all([getAllFilms(), getSelectFilms()])
+                .then(([all, selectes]) => {
+                    setAllFilms({
+                        all,
+                        select: formatSelectedFilms(selectes)
+                    })
+                })
+                .catch(() => {
+                    setMessage(MESSAGES.ERROR)
+                })
+                .finally(() => {
+                    setIsLoading(false)
+                })
+        }
+    }, [values])
+
+    useEffect(() => {
+        if (values && allFilms) {
+            const filtredFilms = filterFilms(allFilms.all, values)
+            const isNotFiltredFilms = !filtredFilms.length
+            if (isNotFiltredFilms) setMessage(MESSAGES.NOT_FOUND)
+
+            const filmsWithSelect = setSelect(filtredFilms, allFilms.selectes)
+            filmsLocal.save(filmsWithSelect)
+            setFilms(filmsWithSelect)
+        }
+    }, [allFilms, values])
+
+
+    useEffect(() => {
+        if (films) {
+            setViewFilms([...films.slice(0, startCountFilms)])
+            setMessage('')
+        }
+        if (!films?.length) setMessage(MESSAGES.NOT_FOUND)
     }, [films, startCountFilms])
 
 
@@ -48,54 +84,11 @@ function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton, setIsSho
         setViewFilms([...viewFilms, ...films.slice(startIndex, endIndex)])
     }
 
+
     function searchFilms(values) {
-        setIsLoading(true)
-        setMessage('')
-
-        getAllFilms()
-            .then(allFilms => {
-                const filterFilmsList = filterFilms(allFilms, values)
-
-                if (!filterFilmsList.length) {
-                    setMessage('Ничего не найдено')
-                    setViewFilms([])
-                }
-
-                setFilmsWhitSelect(filterFilmsList)
-                filmsLocal.save(filterFilmsList)
-            })
-            .catch(() => {
-                setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
-            })
-            .finally(() => {
-                setIsLoading(false)
-            })
+        setValues(values)
+        if (!allFilms) setIsLoading(true)
     }
-
-    function setFilmsWhitSelect(films) {
-        getSelectFilms()
-            .then(savedFilms => {
-                const selectFilms = savedFilms.map(film => ({
-                    movieId: film.movieId,
-                    _id: film._id
-                }))
-
-                const filmsWithSelect = films.map(film => {
-                    let isSelectFilm = false
-                    let _id = ''
-
-                    selectFilms.forEach(selectFilm => {
-                        isSelectFilm = film.id === selectFilm.movieId
-                        if (isSelectFilm) _id = selectFilm._id
-                    })
-
-                    return { ...film, _id }
-                })
-
-                setFilms(filmsWithSelect)
-            })
-    }
-
 
 
     return (
@@ -114,7 +107,7 @@ function Movies({ getAllFilms, getSelectFilms, handleClickSelectButton, setIsSho
                         message={message}
                         handleClickSelectButton={handleClickSelectButton}
                     />
-                    {films.length > 3 && films.length !== viewFilms.length && <button
+                    {films && films?.length > 3 && films?.length !== viewFilms?.length && <button
                         className="movies__next-button"
                         type='button'
                         onClick={() => showMoreFilms()}

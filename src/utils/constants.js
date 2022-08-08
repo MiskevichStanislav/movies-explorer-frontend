@@ -7,5 +7,9 @@ const INPUTS = {
 const PATTERNS = {
     NAME: '([A-Za-zа-яёА-ЯЁ]| |-)*'
 }
+const MESSAGES = {
+    NOT_FOUND: 'Ничего не найдено',
+    ERROR: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+}
 
-export { INPUTS, PATTERNS }
+export { INPUTS, PATTERNS, MESSAGES }

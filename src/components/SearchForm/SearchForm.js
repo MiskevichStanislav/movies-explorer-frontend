@@ -24,13 +24,18 @@ function SearchForm({ searchFilms, type }) {
         if (searchQuery) setIsValid(true)
     }, [])
 
-    function saveValuesLocal() {
-        searchQueryLocal.save(values)
+    function onChangeCheckbox(evt) {
+        const newValues = { ...values, short: evt.target.checked }
+
+        handleChange(evt)
+        searchFilms(newValues)
+        searchQueryLocal.save(newValues)
     }
 
-    const handleSubmitForm = (evt) => {
+    function handleSubmitForm(evt) {
         evt.preventDefault()
-        saveValuesLocal()
+        searchQueryLocal.save(values)
+        
 
         if (!isValid) {
             setIsSearchError(true)
@@ -42,32 +47,32 @@ function SearchForm({ searchFilms, type }) {
 
     return (
         <section className="search" >
-                <form className="forms-search" onSubmit={handleSubmitForm} noValidate>
-                    <input
-                        className="forms-search__input"
-                        type="text"
-                        name="film"
-                        placeholder="Фильм"
-                        value={values.film}
-                        onInput={handleChange}
-                        required
-                    />
-                    <button className="forms-search__button" type="submit">Найти</button>
+            <form className="forms-search" onSubmit={handleSubmitForm} noValidate>
+                <input
+                    className="forms-search__input"
+                    type="text"
+                    name="film"
+                    placeholder="Фильм"
+                    value={values.film}
+                    onInput={handleChange}
+                    required
+                />
+                <button className="forms-search__button" type="submit">Найти</button>
 
-                    <label className="forms-search__label" >
-                        <input
-                            className="forms-search__checkbox"
-                            type="checkbox"
-                            name='short'
-                            checked={values.short}
-                            onChange={handleChange}
-                        />
-                        <div className="forms-search__custom-checkbox">
-                            <div className="forms-search__marking"></div>
-                        </div>
-                        <p className="forms-search__label-text">Короткометражки</p>
-                    </label>
-                </form>
+                <label className="forms-search__label" >
+                    <input
+                        className="forms-search__checkbox"
+                        type="checkbox"
+                        name='short'
+                        checked={values.short}
+                        onChange={onChangeCheckbox}
+                    />
+                    <div className="forms-search__custom-checkbox">
+                        <div className="forms-search__marking"></div>
+                    </div>
+                    <p className="forms-search__label-text">Короткометражки</p>
+                </label>
+            </form>
             {isSearchError && <ValidText type='search'>Нужно ввести ключевое слово</ValidText>}
         </section >
     );
