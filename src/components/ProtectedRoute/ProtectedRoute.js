@@ -2,7 +2,7 @@ import { Redirect, Route } from "react-router-dom";
 
 import Preloader from "../Preloader/Preloader";
 
-import { PAGES } from '../../utils/constants'
+import { PAGES } from '../../utils/constants';
 
 function ProtectedRoute({ isLoggedIn, isPreloader, component: Component, ...props }) {
     return (

@@ -14,7 +14,6 @@ function SearchForm({ searchFilms, type }) {
 
     const [isSearchError, setIsSearchError] = useState(false)
 
-
     const searchQueryLocal = new LoacalStorage(`search-query-${type}`, startValue)
 
     useEffect(() => {
@@ -22,18 +21,18 @@ function SearchForm({ searchFilms, type }) {
 
         setValues(searchQuery)
         if (searchQuery) setIsValid(true)
-    }, [])
+    },[])
 
-    function onChangeCheckbox(evt) {
-        const newValues = { ...values, short: evt.target.checked }
+    function onChangeCheckbox(event) {
+        const newValues = { ...values, short: event.target.checked }
 
-        handleChange(evt)
+        handleChange(event)
         searchFilms(newValues)
         searchQueryLocal.save(newValues)
     }
 
-    function handleSubmitForm(evt) {
-        evt.preventDefault()
+    function handleSubmitForm(event) {
+        event.preventDefault()
         searchQueryLocal.save(values)
 
 
@@ -59,6 +58,7 @@ function SearchForm({ searchFilms, type }) {
                 />
                 <button className="forms-search__button" type="submit">Найти</button>
             </form>
+            {isSearchError && <ValidText type='search'>Нужно ввести ключевое слово</ValidText>}
             <label className="forms-search__label" >
                 <input
                     className="forms-search__checkbox"
@@ -72,7 +72,6 @@ function SearchForm({ searchFilms, type }) {
                 </div>
                 <p className="forms-search__label-text">Короткометражки</p>
             </label>
-            {isSearchError && <ValidText type='search'>Нужно ввести ключевое слово</ValidText>}
         </section >
     );
 }

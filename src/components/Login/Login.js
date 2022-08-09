@@ -2,14 +2,14 @@ import './Login.css';
 
 import Field from "../Field/Field";
 import Authorization from "../Authorization/Authorization";
-import ValidText from "../../components/ValidText/ValidText";
+import ValidText from "../ValidText/ValidText";
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 
 import { useValidationForm } from '../../hooks/useValidationForm'
-import { INPUTS } from '../../utils/constants'
+import { VALIDATION_CONFIGS } from '../../utils/constants'
 
 function Login({ handleLogin }) {
-    const { values, errors, isValid, handleChange } = useValidationForm({ email: '', password: '' })
+    const { values, errors, isValid, handleChange } = useValidationForm({ email: '', password: '' }, VALIDATION_CONFIGS.LOGIN)
 
     function handleSubmitForm(evt) {
         evt.preventDefault()
@@ -20,22 +20,22 @@ function Login({ handleLogin }) {
             <form className="form form-login" onSubmit={handleSubmitForm} name='login'>
                 <Field
                     text='E-mail'
-                    type={INPUTS.EMAIL}
-                    name={INPUTS.EMAIL}
+                    type='email'
+                    name='email'
                     onInput={handleChange}
-                    isValid={!errors[INPUTS.EMAIL]}
-                    value={values[INPUTS.EMAIL]}
+                    isValid={!errors.email}
+                    value={values.email}
                 />
-                {errors[INPUTS.EMAIL] && <ValidText type='auth'>{errors[INPUTS.EMAIL]}</ValidText>}
+                {errors.email && <ValidText type='auth'>{errors.email}</ValidText>}
                 <Field
                     text='Пароль'
-                    type={INPUTS.PASSWORD}
-                    name={INPUTS.PASSWORD}
+                    type='password'
+                    name='password'
                     onInput={handleChange}
-                    isValid={!errors[INPUTS.PASSWORD]}
-                    value={values[INPUTS.PASSWORD]}
+                    isValid={!errors.password}
+                    value={values.password}
                 />
-                {errors[INPUTS.PASSWORD] && <ValidText type='auth'>{errors[INPUTS.PASSWORD]}</ValidText>}
+                {errors.password && <ValidText type='auth'>{errors.password}</ValidText>}
                 <Authorization
                     isDisabled={!isValid}
                 />

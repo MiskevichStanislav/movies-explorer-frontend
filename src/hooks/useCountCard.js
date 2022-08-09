@@ -1,9 +1,7 @@
 import { useState } from "react";
 
 export function useCountCard(CARD_COUNT, CARD_BRAKEPOINT) {
-    
     const [countAddFilms, setCountAddFilms] = useState(0)
-
     const [startCountFilms, setStartCountFilms] = useState(0)
 
     function setParamsCountFilms(mode) {

@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import './Profile.css';
-import Alarm from "../../components/Alarm/Alarm";
+
 import HeaderLayout from "../../layouts/HeaderLayout/HeaderLayout";
 
 import { useValidationForm } from '../../hooks/useValidationForm'
+import { VALIDATION_PARAMS } from '../../utils/constants'
 
 function Profile({ handleUpdateUser, currentUser, handleSignOut, setIsShowMenu }) {
-    const [showAlarm, setShowAlarm] = useState(false)
-    const [messageAlarm, setMessageAlarm] = useState('')
 
     const startValues = {
         name: currentUser.name,
@@ -17,21 +16,20 @@ function Profile({ handleUpdateUser, currentUser, handleSignOut, setIsShowMenu }
 
     const { values, isValid, handleChange, setIsValid } = useValidationForm(startValues)
 
+    useEffect(() => {
+        const isValidName = VALIDATION_PARAMS.REGEX.NAME.test(values.name)
+        const isValidEmail = VALIDATION_PARAMS.REGEX.EMAIL.test(values.email)
+        const isChangeName = values.name !== currentUser.name
+        const isChangeEmail = values.email !== currentUser.email
+
+        isValidName && isValidEmail && (isChangeName || isChangeEmail)
+            ? setIsValid(true)
+            : setIsValid(false)
+    }, [values])
+
     function clickUpdateButton() {
         handleUpdateUser(values)
-            .then(() => {
-                setMessageAlarm('Данные профиля успешно обновлены!')
-                setIsValid(false)
-            })
-            .catch(() => {
-                setMessageAlarm('Не удалось обновить данные профиля!')
-            })
-            .finally(() => {
-                setShowAlarm(true)
-                setTimeout(() => {
-                    setShowAlarm(false)
-                }, 3000)
-            })
+            .then(() => setIsValid(false))
     }
 
     function clickSignOutButton() {
@@ -91,10 +89,6 @@ function Profile({ handleUpdateUser, currentUser, handleSignOut, setIsShowMenu }
                         </div>
                     </div>
                 </div>
-                <Alarm
-                    showAlarm={showAlarm}
-                    messageAlarm={messageAlarm}
-                />
             </div>
         </HeaderLayout>
     );

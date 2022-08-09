@@ -1,9 +1,9 @@
 import './Alarm.css';
 
-function Alarm({ showAlarm, messageAlarm }) {
+function Alarm({ isActiveAlarm, messageAlarm }) {
     return (
         <div className={
-            showAlarm
+            isActiveAlarm
                 ? 'alarm alarm_active'
                 : 'alarm'
         }>

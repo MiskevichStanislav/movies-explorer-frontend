@@ -40,17 +40,11 @@ function MoviesCard({ film, handleClickSelectButton }) {
                 })
         }
     }
+
     return (
         <li className="card-movies">
-            <a className='card-movies__trailer-link' href={film.trailerLink} target="_blank" rel="noreferrer">
-                <img
-                    className="card-movies__image"
-                    src={imageUrl}
-                    alt={film.nameRU}
-                />
-            </a>
 
-             <div className="card-movies__description">
+            <div className="card-movies__description">
                 <div className="card-movies__rows">
                     <p className="card-movies__name">{film.nameRU}</p>
                     <button
@@ -65,8 +59,13 @@ function MoviesCard({ film, handleClickSelectButton }) {
                 </div>
                 <p className="card-movies__length">{formatDuration(film.duration)}</p>
             </div>
-            <div className="card-movies__image"></div>
-           
+            <a className='card-movies__trailer-link' href={film.trailerLink} target="_blank" rel="noreferrer">
+                <img
+                    className="card-movies__image"
+                    src={imageUrl}
+                    alt={film.nameRU}
+                />
+            </a>
         </li>
     );
 }

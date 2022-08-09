@@ -1,5 +1,4 @@
 import { useContext } from "react";
-
 import { useHistory, Link } from "react-router-dom";
 
 import './Header.css';
@@ -8,13 +7,10 @@ import Logo from '../Logo/Logo';
 import Navigation from "../Navigation/Navigation";
 import AccountButton from "../AccountButton/AccountButton";
 
-
-
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import { PAGES } from '../../utils/constants'
 
 function Header({ setIsShowMenu }) {
-
     const { isLoggedIn } = useContext(CurrentUserContext)
     const isMainPage = useHistory().location.pathname === PAGES.MAIN
 

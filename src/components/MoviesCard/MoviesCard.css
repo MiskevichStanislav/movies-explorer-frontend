@@ -12,7 +12,7 @@
 }
 
 .card-movies__trailer-link:hover {
-    opacity: 1;
+    opacity: .8;
 }
 
 .card-movies__description {
@@ -87,6 +87,6 @@
     font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (768 - 320)));
 }
 
-.card-movies__duration {
+.card-movies__length {
     font-size: calc(10px + (11 - 10) * ((100vw - 320px) / (768 - 320)));
 }

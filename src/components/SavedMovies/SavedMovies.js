@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 import './SavedMovies.css';
 
-import SearchForm from '../../components/SearchForm/SearchForm';
-import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout';
 
 import { filterFilms } from '../../utils/filterFilms'
@@ -12,6 +12,7 @@ import { MESSAGES, SHORT_DURATION } from '../../utils/constants'
 function SavedMovies({ requestSelectFilms, handleClickSelectButton, setIsShowMenu, searchQuerySavedMoviesLocal }) {
     const [selectedFilms, setSelectedFilms] = useState(null)
     const [displayedFilms, setDisplayedFilms] = useState(null)
+    
     const [errorMessage, setErrorMessage] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 

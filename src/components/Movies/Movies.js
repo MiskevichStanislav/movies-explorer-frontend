@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import './Movies.css';
 
 import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import HeaderAndFooterLayout from '../../layouts/HeaderAndFooterLayout/HeaderAndFooterLayout';
 
 import { filterFilms } from '../../utils/filterFilms'
@@ -12,14 +12,15 @@ import { MESSAGES, CARD_COUNT, CARD_BRAKEPOINT, SHORT_DURATION } from '../../uti
 import { useCountCard } from '../../hooks/useCountCard'
 
 function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, setIsShowMenu, filmsLocal, searchQueryMoviesLocal }) {
+
     const [allFilms, setAllFilms] = useState(null)
     const [selectedFilms, setSelectedFilms] = useState(null)
     const [filtredFilms, setFiltredFilms] = useState(null)
     const [displayedFilms, setDisplayedFilms] = useState(null)
+    
     const [errorMessage, setErrorMessage] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [queryValues, setQueryValues] = useState(null)
-
     const { countAddFilms, startCountFilms, setParamsCountFilms } = useCountCard(CARD_COUNT, CARD_BRAKEPOINT)
 
 
@@ -143,7 +144,6 @@ function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, 
                     <SearchForm
                         searchFilms={searchFilms}
                         searchQueryLocal={searchQueryMoviesLocal}
-                        type='movies'
                     />
                     <MoviesCardList
                         films={displayedFilms}

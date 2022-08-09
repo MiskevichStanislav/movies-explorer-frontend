@@ -11,13 +11,15 @@ import SavedMovies from '../../components/SavedMovies/SavedMovies';
 import Main from '../../components/Main/Main';
 import NotFound from '../../pages/NotFound/NotFound_404';
 import Menu from "../Menu/Menu";
+import Alarm from "../Alarm/Alarm";
+
 
 import ProtectedRoute from "../../components/ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import MainApi from "../../utils/MainApi";
 import MoviesApi from '../../utils/MoviesApi';
 import { optionsMainApi, optionsMoviesApi } from '../../utils/optionsApi'
-import { PAGES } from '../../utils/constants'
+import { PAGES, ALARM_MESSAGES } from '../../utils/constants'
 import LocalStorage from "../../utils/LocalStorage";
 
 function App() {
@@ -30,6 +32,9 @@ function App() {
 
   const [isPreloader, setIsPreloader] = useState(true)
 
+  const [messageAlarm, setMessageAlarm] = useState(null)
+  const [isActiveAlarm, setIsActiveAlarm] = useState(false)
+
   const history = useHistory()
   const location = useLocation()
 
@@ -37,11 +42,11 @@ function App() {
   const moviesApi = new MoviesApi(optionsMoviesApi)
   const jwtLocal = new LocalStorage('jwt')
   const filmsLocal = new LocalStorage('films')
+  const searchQueryMoviesLocal = new LocalStorage('search-query-movies', { film: '', short: false })
+  const searchQuerySavedMoviesLocal = new LocalStorage('search-query-saved-movies', { film: '', short: false })
 
   useEffect(() => {
-    isShowMenu
-      ? document.body.style.overflow = 'hidden'
-      : document.body.style.overflow = ''
+    document.body.style.overflow = isShowMenu ? 'hidden' : ''
   }, [isShowMenu])
 
   useEffect(() => {
@@ -102,6 +107,10 @@ function App() {
         if (!isLoggedIn) setIsLoggedIn(true)
         setCurrentUser(user)
       })
+      .catch(() => {
+        showAlarm(ALARM_MESSAGES.ERROR.GET_USER)
+        throw new Error()
+      })
       .finally(() => {
         setIsPreloader(false)
       })
@@ -111,14 +120,26 @@ function App() {
     return mainApi.updateUserInfo(user, token)
       .then(newData => {
         setCurrentUser(newData)
+        showAlarm(ALARM_MESSAGES.SUCCESSFULLY.UPDATE_PROFILE)
       })
+      .catch(() => {
+        showAlarm(ALARM_MESSAGES.ERROR.UPDATE_PROFILE)
+        throw new Error()
+      })
+  }
+
+  function clearLocal() {
+    jwtLocal.delete()
+    filmsLocal.delete()
+    searchQueryMoviesLocal.delete()
+    searchQuerySavedMoviesLocal.delete()
   }
 
   function handleSignOut() {
     setIsLoggedIn(false)
     setToken('')
     setCurrentUser({})
-    jwtLocal.delete()
+    clearLocal()
     history.push(PAGES.MAIN)
   }
 
@@ -136,11 +157,27 @@ function App() {
   function handleClickSelectButton(filmId, film) {
     return filmId
       ? mainApi.deleteSelectFilm(filmId, token)
+        .catch(() => {
+          showAlarm(ALARM_MESSAGES.ERROR.DELETE_FILM)
+          throw new Error()
+        })
       : mainApi.addSelectFilm(film, token)
+        .catch(() => {
+          showAlarm(ALARM_MESSAGES.ERROR.ADD_FILM)
+          throw new Error()
+        })
   }
 
   function requestSelectFilms() {
     return mainApi.fetchSelectFilms(token)
+  }
+
+  function showAlarm(message) {
+    setMessageAlarm(message)
+    setIsActiveAlarm(true)
+    setTimeout(() => {
+      setIsActiveAlarm(false)
+    }, 3000)
   }
 
   return (
@@ -158,6 +195,7 @@ function App() {
             component={Movies}
             isPreloader={isPreloader}
             filmsLocal={filmsLocal}
+            searchQueryMoviesLocal={searchQueryMoviesLocal}
           />
 
           <ProtectedRoute
@@ -169,6 +207,7 @@ function App() {
             setIsShowMenu={setIsShowMenu}
             component={SavedMovies}
             isPreloader={isPreloader}
+            searchQueryMoviesLocal={searchQueryMoviesLocal}
           />
 
           <ProtectedRoute
@@ -215,7 +254,10 @@ function App() {
           setIsShowMenu={setIsShowMenu}
         />
       </CurrentUserContext.Provider>
-
+      <Alarm
+        messageAlarm={messageAlarm}
+        isActiveAlarm={isActiveAlarm}
+      />
     </>
   );
 }
