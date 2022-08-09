@@ -136,7 +136,7 @@ function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, 
 
 
     return (
-        <HeaderAndFooterLayout
+ <HeaderAndFooterLayout
             setIsShowMenu={setIsShowMenu}
         >
             <div className="movies">

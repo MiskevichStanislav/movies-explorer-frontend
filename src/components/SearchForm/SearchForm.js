@@ -46,7 +46,7 @@ function SearchForm({ searchFilms, type }) {
 
     return (
         <section className="search" >
-            <form className="forms-search" onSubmit={handleSubmitForm} noValidate>
+<form className="forms-search" onSubmit={handleSubmitForm} noValidate>
                 <input
                     className="forms-search__input"
                     type="text"

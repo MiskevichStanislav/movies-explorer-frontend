@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 import './MoviesCard.css';
+import cardFilm from '../../images/film.jpg';
 
 import { formatDuration } from '../../utils/formatDuration'
 import { BASE_URL, PAGES } from '../../utils/constants'
@@ -54,12 +55,13 @@ function MoviesCard({ film, handleClickSelectButton }) {
                                 : "card-movies__select"
                         }
                         type="button"
+
                         onClick={clickSelectButton}
                     ></button>
                 </div>
                 <p className="card-movies__length">{formatDuration(film.duration)}</p>
             </div>
-            <a className='card-movies__trailer-link' href={film.trailerLink} target="_blank" rel="noreferrer">
+   <a className='card-movies__trailer-link' href={film.trailerLink} target="_blank" rel="noreferrer">
                 <img
                     className="card-movies__image"
                     src={imageUrl}
