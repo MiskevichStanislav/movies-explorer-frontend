@@ -41,7 +41,7 @@ function SearchForm({ searchFilms, searchQueryLocal }) {
     }
 
     return (
-        <section className="search">
+        <section className="search" >
             <form className="forms-search" onSubmit={handleSubmitForm} noValidate>
                 <input
                     className="forms-search__input"
@@ -55,20 +55,20 @@ function SearchForm({ searchFilms, searchQueryLocal }) {
                 <button className="forms-search__button" type="submit">Найти</button>
             </form>
             {isSearchError && <ValidText type='search'>Нужно ввести ключевое слово</ValidText>}
-                <label className="forms-search__label" >
-                    <input
-                        className="forms-search__checkbox"
-                        type="checkbox"
-                        name='short'
-                        checked={values.short}
-                        onChange={onChangeCheckbox}
-                    />
-                    <div className="forms-search__custom-checkbox">
-                        <div className="forms-search__marking"></div>
-                    </div>
-                    <p className="forms-search__label-text">Короткометражки</p>
-                </label>
-        </section>
+            <label className="forms-search__label" >
+                <input
+                    className="forms-search__checkbox"
+                    type="checkbox"
+                    name='short'
+                    checked={values.short}
+                    onChange={onChangeCheckbox}
+                />
+                <div className="forms-search__custom-checkbox">
+                    <div className="forms-search__marking"></div>
+                </div>
+                <p className="forms-search__label-text">Короткометражки</p>
+            </label>
+        </section >
     );
 }
 
