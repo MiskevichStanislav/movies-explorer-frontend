@@ -52,4 +52,4 @@ export default class MainApi {
     deleteSelectFilm(filmId, token) {
         return this._fetch(`/movies/${filmId}`, 'DELETE', null, token)
     }
-} 
+}

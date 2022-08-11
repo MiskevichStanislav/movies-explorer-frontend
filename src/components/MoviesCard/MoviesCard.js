@@ -61,7 +61,7 @@ function MoviesCard({ film, handleClickSelectButton }) {
                 </div>
                 <p className="card-movies__length">{formatDuration(film.duration)}</p>
             </div>
-   <a className='card-movies__trailer-link' href={film.trailerLink} target="_blank" rel="noreferrer">
+            <a className='card-movies__trailer-link' href={film.trailerLink} target="_blank" rel="noreferrer">
                 <img
                     className="card-movies__image"
                     src={imageUrl}

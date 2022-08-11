@@ -15,7 +15,7 @@ function Authorization({ isDisabled }) {
     const textButton = isSignIn
         ? loaderButton ? 'Вход...' : 'Войти'
         : loaderButton ? 'Регистрация...' : 'Зарегистрироваться'
-    
+
     const authorization = (
         <div className="authorization">
             <p className="authorization__text">

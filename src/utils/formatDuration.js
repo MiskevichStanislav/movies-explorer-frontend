@@ -5,4 +5,4 @@ export const formatDuration = (duration) => {
     return hours
         ? `${hours}ч ${minutes}м`
         : `${minutes}м`
-} 
+}

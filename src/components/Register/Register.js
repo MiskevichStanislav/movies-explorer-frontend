@@ -46,11 +46,11 @@ function Register({ handleRegister }) {
                     value={values.password}
                 />
                 {errors.password && <ValidText type='auth'>{errors.password}</ValidText>}
-            <Authorization
-                isDisabled={!isValid}
-            />
+                <Authorization
+                    isDisabled={!isValid}
+                />
             </form>
-            </AuthLayout>
+        </AuthLayout>
     );
 }
 

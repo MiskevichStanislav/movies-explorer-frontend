@@ -15,4 +15,4 @@ export default class MoviesApi {
                     : Promise.reject(`Ошибка: ${res.status}`)
             })
     }
-} 
+}
