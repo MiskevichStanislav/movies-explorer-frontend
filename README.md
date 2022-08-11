@@ -4,7 +4,7 @@
 #### [План работы над дипломным проектом (Online)](https://trello.com/b/CbFnh2HD/project-diploma-work)
 #### [Индивидуальный макет в Figm'e](https://www.figma.com/file/mIrPoMCYLA3glp9KZDm7yt/Diploma-(Copy)?node-id=891%3A3857)
 ## [Дипломный проект(Фронтенд)](https://mydiplom.nomoredomains.xyz)
-## [Ссылка для ревьера на Pull Request](https://github.com/MiskevichStanislav/movies-explorer-frontend/pull/2)
+## [Ссылка для ревьюера на Pull Request](https://github.com/MiskevichStanislav/movies-explorer-frontend/pull/2)
 
 #### Выполнил работу: Мискевич Станислав
 
