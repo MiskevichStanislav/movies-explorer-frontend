@@ -12,14 +12,14 @@ import { MESSAGES, SHORT_DURATION } from '../../utils/constants'
 function SavedMovies({ requestSelectFilms, handleClickSelectButton, setIsShowMenu, searchQuerySavedMoviesLocal }) {
     const [selectedFilms, setSelectedFilms] = useState(null)
     const [displayedFilms, setDisplayedFilms] = useState(null)
-    
+
     const [errorMessage, setErrorMessage] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         getSelectFilms()
     }, [])
-        
+
     function getSelectFilms() {
         startLoader()
         requestSelectFilms()
@@ -42,54 +42,52 @@ function SavedMovies({ requestSelectFilms, handleClickSelectButton, setIsShowMen
         films?.length ? hideErrorMessage() : showErrorMessage(MESSAGES.NOT_FOUND)
     }
 
-
-function handleDeleteFilm(filmId) {
-    handleClickSelectButton(filmId)
-        .then(() => setAllFilms(selectedFilms.filter(film => film._id !== filmId)))
-}
-
-function setAllFilms(films) {
-    setSelectedFilms(films)
-    setDisplayedFilms(films)
-}
-
-function startLoader() {
-    setIsLoading(true)
-}
-
-function stopLoader() {
-    setIsLoading(false)
-}
-
-function showErrorMessage(message) {
-    setErrorMessage(message)
+    function handleDeleteFilm(filmId) {
+        handleClickSelectButton(filmId)
+            .then(() => setAllFilms(selectedFilms.filter(film => film._id !== filmId)))
     }
-    
-function hideErrorMessage() {
-    setErrorMessage(null)
-}
 
+    function setAllFilms(films) {
+        setSelectedFilms(films)
+        setDisplayedFilms(films)
+    }
 
-return (
-    <HeaderAndFooterLayout
-        setIsShowMenu={setIsShowMenu}
-    >
-        <div className="saved">
-            <div className="container movies__container">
-                <SearchForm
-                    searchFilms={searchFilms}
-                    searchQueryLocal={searchQuerySavedMoviesLocal}
-                />
-                <MoviesCardList
-                    films={displayedFilms}
-                    isLoading={isLoading}
-                    message={errorMessage}
-                    handleClickSelectButton={handleDeleteFilm}
-                />
+    function startLoader() {
+        setIsLoading(true)
+    }
+
+    function stopLoader() {
+        setIsLoading(false)
+    }
+
+    function showErrorMessage(message) {
+        setErrorMessage(message)
+    }
+
+    function hideErrorMessage() {
+        setErrorMessage(null)
+    }
+
+    return (
+        <HeaderAndFooterLayout
+            setIsShowMenu={setIsShowMenu}
+        >
+            <div className="saved">
+                <div className="container movies__container">
+                    <SearchForm
+                        searchFilms={searchFilms}
+                        searchQueryLocal={searchQuerySavedMoviesLocal}
+                    />
+                    <MoviesCardList
+                        films={displayedFilms}
+                        isLoading={isLoading}
+                        message={errorMessage}
+                        handleClickSelectButton={handleDeleteFilm}
+                    />
+                </div>
             </div>
-        </div>
-    </HeaderAndFooterLayout>
-);
+        </HeaderAndFooterLayout>
+    );
 }
 
 export default SavedMovies;

@@ -24,4 +24,4 @@ export function useCountCard(CARD_COUNT, CARD_BRAKEPOINT) {
     }
 
     return { countAddFilms, startCountFilms, setParamsCountFilms };
-} 
+}

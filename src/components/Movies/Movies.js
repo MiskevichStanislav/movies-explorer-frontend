@@ -17,12 +17,11 @@ function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, 
     const [selectedFilms, setSelectedFilms] = useState(null)
     const [filtredFilms, setFiltredFilms] = useState(null)
     const [displayedFilms, setDisplayedFilms] = useState(null)
-    
+
     const [errorMessage, setErrorMessage] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [queryValues, setQueryValues] = useState(null)
     const { countAddFilms, startCountFilms, setParamsCountFilms } = useCountCard(CARD_COUNT, CARD_BRAKEPOINT)
-
 
     useEffect(() => {
         getSelectFilms()
@@ -30,7 +29,6 @@ function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, 
         addResizeEvent()
         return () => removeResizeEvent()
     }, [])
-
 
     useEffect(() => {
         if (selectedFilms && !isLoading) {
@@ -134,7 +132,6 @@ function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, 
         setErrorMessage(null)
     }
 
-
     return (
         <HeaderAndFooterLayout
             setIsShowMenu={setIsShowMenu}
@@ -159,7 +156,6 @@ function Movies({ requestAllFilms, requestSelectFilms, handleClickSelectButton, 
                             type='button'
                             onClick={() => showMoreFilms()}
                         >Ещё</button>}
-
                 </div>
             </div >
         </HeaderAndFooterLayout>

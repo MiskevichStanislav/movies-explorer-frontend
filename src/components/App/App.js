@@ -207,7 +207,7 @@ function App() {
             setIsShowMenu={setIsShowMenu}
             component={SavedMovies}
             isPreloader={isPreloader}
-            searchQueryMoviesLocal={searchQueryMoviesLocal}
+            searchQuerySavedMoviesLocal={searchQuerySavedMoviesLocal}
           />
 
           <ProtectedRoute

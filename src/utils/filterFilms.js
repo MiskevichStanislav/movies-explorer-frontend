@@ -8,4 +8,4 @@ export const filterFilms = (films, shortDuration, { film: searchQuery, short: is
             ? filmName.includes(search) && isShortFilm
             : filmName.includes(search)
     })
-}  
+}

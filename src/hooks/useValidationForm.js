@@ -20,4 +20,4 @@ export function useValidationForm(defaultValues = {}, config) {
     };
 
     return { values, errors, isValid, handleChange, setValues, setIsValid };
-} 
+}
