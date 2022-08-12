@@ -1,11 +1,14 @@
 import './HeaderLayout.css';
+
 import Header from '../../components/Header/Header';
 
 
-function HeaderLayout({ children }) {
+function HeaderLayout({ children, setIsShowMenu }) {
     return (
         <>
-            <Header />
+            <Header
+                setIsShowMenu={setIsShowMenu}
+            />
             <main className="main">
                 {children}
             </main>

@@ -18,10 +18,9 @@
     line-height: 1;
     text-decoration: none;
     cursor: pointer;
-    /* border-bottom: 1px solid; */
 }
 
- .navtab__link:after {
+.navtab__link:after {
     background-color: #ffffff;
     display: block;
     content: "";

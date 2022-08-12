@@ -8,12 +8,9 @@ function Footer() {
                 <div className="footer__wrapper">
                     <p className="footer__copyright">© 2022.Разработал Мискевич Станислав</p>
                     <ul className="footer__links">
-                        <li><a className="footer__link" href="https://practicum.yandex.ru/" target="_blank" rel="noreferrer">Яндекс.Практикум</a>
-                        </li>
-                        <li><a className="footer__link" href="https://github.com/MiskevichStanislav" target="_blank" rel="noreferrer">Github</a>
-                        </li>
-                        <li><a className="footer__link" href="https://vk.com/miskevichstasik" target="_blank" rel="noreferrer">Вконтакте</a>
-                        </li>
+                        <li><a className="footer__link" href="https://practicum.yandex.ru/" target="_blank" rel="noreferrer">Яндекс.Практикум</a></li>
+                        <li><a className="footer__link" href="https://github.com/MiskevichStanislav" target="_blank" rel="noreferrer">Github</a></li>
+                        <li><a className="footer__link" href="https://vk.com/miskevichstasik" target="_blank" rel="noreferrer">Вконтакте</a></li>
                     </ul>
                 </div>
             </div>

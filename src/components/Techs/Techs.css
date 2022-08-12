@@ -49,6 +49,7 @@
     .techs {
         background-color: #202020;
         padding: calc(90px + (100 - 90) * ((100vw - 768px) / (1140 - 768))) 0;
+        background-color: #202020;
     }
 
     .techs__title {
@@ -84,6 +85,7 @@
     .techs__title {
         margin-bottom: calc(60px + (80 - 60) * ((100vw - 320px) / (768 - 320)));
         border-bottom: 1px solid #000;
+
     }
 
     .techs__subtitle {

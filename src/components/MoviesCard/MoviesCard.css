@@ -5,11 +5,14 @@
 }
 
 .card-movies__image {
-    /* background-image: url("../../images/film.jpg"); */
     height: 236px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+
+.card-movies__trailer-link:hover {
+    opacity: .8;
 }
 
 .card-movies__description {
@@ -50,9 +53,9 @@
     color: #8b8b8b;
 }
  .card-movies:hover {
-    cursor: pointer;
-    opacity: .8;
-} 
+  cursor: pointer;
+     opacity: .8;
+ }
 
 .saved .card-movies {
     cursor: pointer;
@@ -84,6 +87,6 @@
     font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (768 - 320)));
 }
 
-.card-movies__duration {
+.card-movies__length {
     font-size: calc(10px + (11 - 10) * ((100vw - 320px) / (768 - 320)));
 }

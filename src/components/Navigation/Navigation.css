@@ -11,5 +11,9 @@
 
 .nav__link_active {
     color: #ffffff;
-    font-weight: 500;
+    font-weight: 600;
+    text-shadow:
+            0 0 7px #0fa,
+            0 0 10px #0fa,
+            0 0 21px #0fa;
 }

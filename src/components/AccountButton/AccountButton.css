@@ -16,6 +16,7 @@
     color: #fff;
     font-size: 0.950em;
     transition: .3s ease-in-out;
+    width: 100px;
 }
 
 .account-button__link {
